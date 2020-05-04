@@ -1,14 +1,11 @@
 #pragma once
 
-#include "Interfaces.h"
-
-class BasicImplementation final : public BasicInterface
+class BasicImplementation final : public synodic::Module<BasicImplementation, BasicInterface>
 {
 
 public:
-
 	~BasicImplementation() override = default;
-	
+
 	int Get() override
 	{
 		return 5;
