@@ -5,10 +5,10 @@
 namespace test
 {
 
-	concept basic_interface = requires
-	{
-		true;
-	};
+	//concept basic_interface = requires
+	//{
+	//	true;
+	//};
 
 	class BasicInterface
 	{
@@ -16,10 +16,10 @@ namespace test
 	};
 	
 	//BasicModule<Implementation>
-	template<basic_interface T>
-	class BasicModule : synodic::Module<T, BasicInterface>
-	{
-	};
+	//template<basic_interface T>
+	//class BasicModule : synodic::Module<T, BasicInterface>
+	//{
+	//};
 	
 
 	

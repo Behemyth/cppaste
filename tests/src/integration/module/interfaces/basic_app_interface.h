@@ -4,15 +4,17 @@
 
 #include "basic_interface.h"
 
-class BasicAppInterface
+namespace test
 {
-public:
-	
-	BasicAppInterface(std::unique_ptr<BasicModule>& module)
+	class BasicAppInterface
 	{
-	}
+	public:
+		BasicAppInterface(std::unique_ptr<test::BasicInterface>&)
+		{
+		}
 
-	virtual ~BasicAppInterface() = 0;
+		virtual ~BasicAppInterface() = 0;
 
-	virtual int Get() = 0;
-};
+		virtual int Get() = 0;
+	};
+}

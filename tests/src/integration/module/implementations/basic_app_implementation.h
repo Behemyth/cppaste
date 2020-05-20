@@ -1,20 +1,25 @@
 #pragma once
 
-class AppImplementation final : public synodic::Module<AppImplementation, AppInterface>
+#include "basic_implementation.h"
+
+namespace test
 {
-public:
-	AppImplementation(std::unique_ptr<BasicInterface>& module) :
-		AppInterface(module), value_(module->Get())
+	class BasicAppImplementation final
 	{
-	}
+	public:
+		explicit BasicAppImplementation(BasicImplementation& basicImplementation) :
+			value_(basicImplementation.Get())
+		{
+		}
 
-	~AppImplementation() override = default;
+		~BasicAppImplementation() = default;
 
-	int Get() override
-	{
-		return value_;
-	}
+		[[nodiscard]] int Get() const
+		{
+			return value_;
+		}
 
-private:
-	int value_;
-};
+	private:
+		int value_;
+	};
+}

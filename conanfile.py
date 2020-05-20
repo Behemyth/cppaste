@@ -2,7 +2,7 @@ from conans import ConanFile, CMake
 
 class SynodicCoreConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
-    requires = "doctest/2.3.7", "boost/1.72.0"
+    requires = "doctest/2.3.7", "boost/1.73.0"
     generators = "cmake_find_package", "cmake_paths"
 
     def build(self):

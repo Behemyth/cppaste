@@ -1,10 +1,24 @@
 #pragma once
 
-class SimpleInterface
+
+namespace test
 {
 
-public:
-	virtual ~SimpleInterface() = 0;
+	//template<typename T>
+	//concept simple_interface = requires(T a)
+	//{
+	//	true;
+	//};
 
-	virtual int Get() = 0;
-};
+	
+	class SimpleInterface
+	{
+
+	public:
+		virtual ~SimpleInterface() = 0;
+
+		virtual int Get() = 0;
+	};
+
+
+}

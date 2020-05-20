@@ -1,0 +1,16 @@
+= Composition Design
+
+== Modules
+
+There are a few different purposes for a Synodic Module to aid large project composition. 
+A Module is meant to help in the scenario where the top-level application is aware of type information.
+
+. They enforce the creation of an interface and at least one implementation
+. Implementations are automatically registered
+. They automate the dependency graph building between module types
+. They handle the lifetime of all created types
+. They provide compile-time and run-time features
+
+== Plugins
+
+*TODO*

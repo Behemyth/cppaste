@@ -1,13 +1,18 @@
 #pragma once
 
-class BasicImplementation final : public synodic::Module<BasicImplementation, BasicInterface>
+namespace test
 {
-
-public:
-	~BasicImplementation() override = default;
-
-	int Get() override
+	class BasicImplementation final
 	{
-		return 5;
-	}
-};
+
+	public:
+		BasicImplementation()  = default;
+		~BasicImplementation() = default;
+
+
+		[[nodiscard]] int Get() const
+		{
+			return 5;
+		}
+	};
+}

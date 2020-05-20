@@ -1,59 +1,60 @@
-#include <memory>
-
 #include "composition/module.h"
 #include "composition/package.h"
 #include "doctest/doctest.h"
-#include "implementations/basic_implementation.h"
+#include "implementations/basic_app_implementation.h"
 #include "interfaces/basic_interface.h"
+
 
 TEST_CASE("Static Injection")
 {
 
-	Module<BasicImplementation> doot;
-	
-	synodic::Package testPackage(doot);
+	//const synodic::Module<test::BasicImplementation> staticModule;
+	//
+	//synodic::Package testPackage(staticModule);
 
-	
-	std::unique_ptr<AppInterface> app = synodic::CreateModule<AppInterface>();
+	//const auto app = testPackage.Create<test::BasicAppImplementation>();
 
-	// TODO: Write test
-	REQUIRE(app->Get() == 5);
+	//CHECK(app.Get() == 5);
 }
 
 TEST_CASE("Static Polymorphic Injection")
-{
-	Module<test::BasicInterface> doot;
-	
+{	
 	// TODO: Write test
 }
 
 TEST_CASE("Dynamic Polymorphic Injection")
 {
-	Module<test::BasicInterface> doot;
-
-	synodic::Package testPackage(doot);
-	
-	// TODO: Write test
+//	const synodic::Module<test::BasicInterface> dynamicModule;
+//
+//	synodic::Package testPackage(dynamicModule);
+//	
+//	test::BasicAppImplementation app = testPackage.Create<BasicAppImplementation>();
+//
+//	CHECK(app->Get() == 5);
 }
 
 TEST_CASE("Implicit Dynamic Linking")
 {
-	// TODO: Write test
+	// TODO: Write test - Issue #10 
 }
 
 TEST_CASE("Explicit Dynamic Linking")
 {
-	// TODO: Write test
+	// TODO: Write test - Issue #10 
 }
 
 TEST_CASE("Type Cast")
 {
-	// TODO: Write test
-	// TODO: The BasicImplementation should be the same object as the BasicInterface
-	// TODO: Is the better option to have a type cast in each implementation manually by the user?
+	 synodic::Module<test::BasicInterface> staticModule;
+	
+	 synodic::Package testPackage(staticModule);
+
+	 const auto app = testPackage.Create<test::BasicAppImplementation>();
+
+	 CHECK(app.Get() == 5);
 }
 
 TEST_CASE("Implementation Swap")
 {
-	// TODO: Write test
+	// TODO: Write test - Issue #11
 }
