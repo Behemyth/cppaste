@@ -12,19 +12,19 @@ namespace synodic
 	{
 
 	public:
-		explicit constexpr Package(synodic::Module<Modules>&... modules);
+		explicit constexpr Package(Module<Modules>&... modules);
 
 
 		template<typename T>
 		T Create();
 
 	private:
-		boost::di::injector<Modules...> injector_;
+		boost::di::injector<Modules...> staticInjector_;
 	};
 
 	template<typename... Modules>
-	constexpr Package<Modules...>::Package(synodic::Module<Modules>&... modules) :
-		injector_(boost::di::make_injector(modules.Injector()...))
+	constexpr Package<Modules...>::Package(Module<Modules>&... modules) :
+		staticInjector_(boost::di::make_injector(modules.Inject()...))
 	{
 	}
 
@@ -34,7 +34,7 @@ namespace synodic
 	{
 		//static_assert(boost::di::is_creatable<T>(injector_), "Not Createable");
 
-		return injector_.template create<T>();
+		return staticInjector_.template create<T>();
 	}
 
 }

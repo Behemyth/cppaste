@@ -1,5 +1,10 @@
+#include <memory>
+
 #include "composition/package.h"
 #include "doctest/doctest.h"
+#include "implementation1.h"
+#include "implementation2.h"
+#include "interface.h"
 
 // Modules have the capability to provide an implementation to an interface templated over possible
 // implementation types
@@ -7,16 +12,6 @@
 
 template<typename T>
 concept StaticConcept = true;
-
-
-class DynamicInterface
-{
-public:
-	DynamicInterface()			= default;
-	virtual ~DynamicInterface() = default;
-
-	virtual int Get() = 0;
-};
 
 // template<StaticConcept T>
 // class StaticInterface : DynamicInterface
@@ -32,53 +27,6 @@ public:
 //
 // private:
 //	T implementation;
-//};
-
-
-class ImplementationA : public DynamicInterface
-{
-public:
-	ImplementationA() = default;
-	~ImplementationA() override = default;
-
-	[[nodiscard]] int Get() override
-	{
-		return 3;
-	}
-};
-
-class Test : synodic::Implementation<DynamicInterface, ImplementationA>
-{
-
-	Test() : synodic::Implementation<DynamicInterface, ImplementationA>(false)
-	{
-	}
-	~Test() override = default;
-
-	bool Instantiate() override
-	{
-		return true;
-	}
-	
-};
-
-// class ImplementationB : synodic::Implementation<DynamicInterface, ImplementationB>
-//{
-// public:
-//	ImplementationB() : synodic::Implementation<DynamicInterface, ImplementationB>(false)
-//	{
-//	}
-//	~ImplementationB() override = default;
-//
-//	bool Instantiate() override
-//	{
-//		return true;
-//	}
-//
-//	[[nodiscard]] int Get() override
-//	{
-//		return 4;
-//	}
 //};
 
 
@@ -138,36 +86,40 @@ private:
 };
 
 
-// TEST_CASE("Static Polymorphic Injection")
-//{
-//	synodic::Module<DynamicInterface> staticModule;
-//
-//	synodic::Package testPackage(staticModule);
-//	const auto app = testPackage.Create<StaticAppA>();
-//
-//	CHECK(app.Get() == 4);
-//}
+TEST_CASE("Static Polymorphic Injection")
+{
+	// synodic::Module<DynamicInterface> staticModule;
+
+	// synodic::Package testPackage(staticModule);
+	// const auto app = testPackage.Create<StaticAppA>();
+
+	// CHECK(app.Get() == 4);
+}
 
 
 // All modules can be null
 
-// TEST_CASE("No Implementations")
-//{
-//	synodic::Package testPackage;
-//	const auto app = testPackage.Create<DynamicApp>();
-//}
+TEST_CASE("No Implementations")
+{
+	// synodic::Package testPackage;
+	// const auto app = testPackage.Create<DynamicApp>();
+}
 
 
 // Modules have the capability to provide an implementation to an interface with dynamic inheritance
 
 TEST_CASE("Dynamic Polymorphic Injection")
 {
-	 synodic::Module<DynamicInterface> dynamicModule;
+	const synodic::ModuleParameters params;
+	ImplementationAInjector implementationAInjector;
+	ImplementationBInjector implementationBInjector;
+	synodic::Module<DynamicInterface> dynamicModule(
+		params, implementationAInjector, implementationBInjector);
 
-	 synodic::Package testPackage(dynamicModule);
-	 const auto app = testPackage.Create<DynamicApp>();
+	synodic::Package testPackage(dynamicModule);
+	const auto app = testPackage.Create<DynamicApp>();
 
-	CHECK(app.Get() == 2);
+	CHECK(app.Get() == 3);
 }
 
 

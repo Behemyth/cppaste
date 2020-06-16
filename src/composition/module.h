@@ -1,9 +1,8 @@
 #pragma once
 
 #include <boost/di.hpp>
-#include <boost/di/extension/injections/extensible_injector.hpp>
-#include <boost/di/extension/providers/runtime_provider.hpp>
 #include <concepts>
+
 
 // Define EXPORTED for any platform
 // TODO: wrap + use boost.dll functionality
@@ -18,29 +17,57 @@ namespace synodic
 	template<typename T>
 	concept dynamic_interface = true;
 
+	template<typename Derived, typename Base>
+	concept injector = true;
+
+	template<typename Base, typename Derived>
+	class Injector
+	{
+
+		template<typename>
+		friend class Module;
+		
+		static_assert(
+			std::derived_from<Derived, Base>,
+			"An Injector's `Derived` type is required to publicly inherit from the `Base` "
+			"type.");
+
+	public:
+		constexpr Injector() = default;
+		virtual ~Injector()	 = default;
+
+		virtual bool Instantiate() = 0;
+
+	private:
+		boost::di::injector<Base> Inject()
+		{
+			return boost::di::make_injector(boost::di::bind<Base>().template to<Derived>());
+		}
+	};
+
+
+	struct ModuleParameters
+	{
+	};
 
 	template<typename Interface>
 	class Module
 	{
 
 	public:
-		constexpr Module() : enabled_(true)
+		// TODO: Once reflection rolls around in C++23, `implementations` can be deduced.
+		template<typename... Implementations>
+		explicit constexpr Module(
+			const ModuleParameters& parameters,
+			Implementations&... implementations) :
+			staticInjector_(boost::di::make_injector(implementations.Inject()...)),
+			enabled_(true)
 		{
 		}
 
-		boost::di::injector<Interface> Injector()
+		constexpr auto Inject()
 		{
-			return boost::di::make_injector();//boost::di::extension::make_extensible(staticInjector_));
-		}
-
-		template<typename Fn, typename... Args> requires std::invocable<Fn, Args...>
-		static void Bind(Fn&& function, Args&&... arguments)
-		{
-			
-			//binder_ = [this, function, arguments...]() {
-			//	boost::di::make_injector(
-			//		binder_(), std::invoke(function, std::forward<Args>(arguments)...));
-			//};
+			return staticInjector_;
 		}
 
 		[[nodiscard]] bool Enabled() const
@@ -49,67 +76,8 @@ namespace synodic
 		}
 
 	private:
-		// TODO
-		// boost::di::extension::runtime_injector dynamicInjector_;
+		boost::di::injector<Interface> staticInjector_;
 
-		// Each module shares the same compile-time set ∴ static
-		//static inline boost::di::injector<Interface> staticInjector_ = boost::di::make_injector();
-
-		//std::function<boost::di::injector<Interface>()> binder_;
-		
 		bool enabled_;
 	};
-
-	// Interface is templated over the interface type to provide automatic registration
-	// segmented by the interface type
-	// template<dynamic_interface Base>
-	// class Interface
-	//{
-	//	template<typename T>
-	//	friend class Module<T>;
-
-
-	// public:
-	//	Interface()			 = default;
-	//	virtual ~Interface() = default;
-
-	// private:
-	//	constexpr static auto Bind()
-	//	{
-	//		boost::di::make_injector();
-	//	}
-	//};
-
-	template<typename Base, typename Derived>
-	class Implementation
-	{
-		
-		static_assert(
-			std::derived_from<Derived, Base>,
-			"An Implementation's `Derived` type is required to publicly inherit from the `Base` "
-			"type.");
-
-	public:
-		Implementation(bool dummy)
-		{
-			(void)registered_;
-		};
-		virtual ~Implementation() = default;
-
-		virtual bool Instantiate() = 0;
-
-		constexpr static bool Register()
-		{
-			//Module<Base>::Bind([]() -> auto {
-			//	return boost::di::make_injector(boost::di::bind<Base>().template to<Derived>());
-			//});
-
-			return true;
-		}
-
-	protected:
-		// Force class registration
-		static constexpr bool registered_ = Register();
-	};
-
 }

@@ -39,6 +39,7 @@ set_target_properties(tests
 find_package(doctest 2.3.8 REQUIRED)
 
 target_link_libraries(tests
+PUBLIC
 	synodic::Core
     doctest::doctest
 )
