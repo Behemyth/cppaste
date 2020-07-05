@@ -5,8 +5,6 @@
 #include "composition/module.h"
 
 
-// Basic Types
-
 class Interface
 {
 public:
@@ -91,24 +89,6 @@ public:
 	}
 };
 
-// T - unique scope
-class ValueApp
-{
-public:
-	explicit ValueApp(ImplementationA implementation) : value_(implementation.Get())
-	{
-	}
-	~ValueApp() = default;
-
-	[[nodiscard]] int Get() const
-	{
-		return value_;
-	}
-
-private:
-	int value_;
-};
-
 // T& - singleton scope
 class ReferenceApp
 {
@@ -117,78 +97,6 @@ public:
 	{
 	}
 	~ReferenceApp() = default;
-
-	[[nodiscard]] int Get() const
-	{
-		return value_;
-	}
-
-private:
-	int value_;
-};
-
-// const T& - singleton scope
-class ConstReferenceApp
-{
-public:
-	explicit ConstReferenceApp(const ImplementationA& implementation) : value_(implementation.Get())
-	{
-	}
-	~ConstReferenceApp() = default;
-
-	[[nodiscard]] int Get() const
-	{
-		return value_;
-	}
-
-private:
-	int value_;
-};
-
-// T*- unique scope, ownership transfer
-class PointerApp
-{
-public:
-	explicit PointerApp(Interface* implementation) : value_(implementation->Get())
-	{
-	}
-	~PointerApp() = default;
-
-	[[nodiscard]] int Get() const
-	{
-		return value_;
-	}
-
-private:
-	int value_;
-};
-
-// const T*- unique scope, ownership transfer
-class ConstPointerApp
-{
-public:
-	explicit ConstPointerApp(const Interface* implementation) : value_(implementation->Get())
-	{
-	}
-	~ConstPointerApp() = default;
-
-	[[nodiscard]] int Get() const
-	{
-		return value_;
-	}
-
-private:
-	int value_;
-};
-
-// T&& - unique scope
-class UniversalReferenceApp
-{
-public:
-	explicit UniversalReferenceApp(ImplementationA&& implementation) : value_(implementation.Get())
-	{
-	}
-	~UniversalReferenceApp() = default;
 
 	[[nodiscard]] int Get() const
 	{
@@ -215,47 +123,6 @@ public:
 
 private:
 	int value_;
-};
-
-// std::shared_ptr - singleton scope
-class SharedPtrApp
-{
-public:
-	explicit SharedPtrApp(std::shared_ptr<Interface> implementation) : value_(implementation->Get())
-	{
-	}
-	~SharedPtrApp() = default;
-
-	[[nodiscard]] int Get() const
-	{
-		return value_;
-	}
-
-private:
-	int value_;
-};
-
-// TODO
-// std::weak_ptr - singleton scope
-class WeakPtrApp
-{
-public:
-	explicit WeakPtrApp(std::weak_ptr<Interface> implementation) : value_(implementation)
-	{
-	}
-	~WeakPtrApp() = default;
-
-	[[nodiscard]] int Get() const
-	{
-		if(const auto shared = value_.lock())
-		{  // Has to be copied into a shared_ptr before usage
-			return shared->Get();
-		}
-		return 0;
-	}
-
-private:
-	std::weak_ptr<Interface> value_;
 };
 
 template<typename InterfaceType = class Interface>
