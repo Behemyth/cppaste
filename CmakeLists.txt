@@ -45,8 +45,8 @@ PROPERTIES
 ##############################################
 #Dependencies
 
-find_package(Boost 1.73 REQUIRED)
-find_package(di 1.1 REQUIRED)
+#find_package(di 1.1 REQUIRED)
+
 
 ##############################################
 #Sources
@@ -65,9 +65,8 @@ PRIVATE
 )
 
 target_link_libraries(Core
-PUBLIC
-	Boost::Boost
-	di::di
+PRIVATE
+	#di::di
 )
 
 #Provides Visual Studio filter support

@@ -7,7 +7,7 @@ list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}) #TODO: remove with new Conan 
 
 # Global Options
 set(CMAKE_FIND_PACKAGE_PREFER_CONFIG ON) # Opposite module/PCF order for `find_package`
-include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
+
 
 ##############################################
 #Project 
@@ -36,7 +36,7 @@ set_target_properties(tests
 ##############################################
 # Dependencies
 
-find_package(doctest 2.3.8 REQUIRED)
+find_package(doctest 2.4.0 REQUIRED)
 
 target_link_libraries(tests
 PUBLIC
