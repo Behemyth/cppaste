@@ -15,7 +15,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON) # Group the default targets in a fo
 
 project(Core 
 	VERSION 0.0.1
-	DESCRIPTION "DOOT"
+	DESCRIPTION "Synodic Software's Core"
 	LANGUAGES CXX
 )
 
