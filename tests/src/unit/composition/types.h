@@ -37,6 +37,21 @@ public:
 	}
 };
 
+template<>
+class synodic::
+	ImplementationConfiguration<InterfaceWithTemplateFunction, ImplementationWithTemplateFunction> :
+	public ModuleConfig<InterfaceWithTemplateFunction>
+{
+public:
+	ImplementationConfiguration()  = default;
+	~ImplementationConfiguration() = default;
+
+	constexpr uint8_t Priority()
+	{
+		return 1;
+	}
+};
+
 class ImplementationA : public Interface
 {
 public:

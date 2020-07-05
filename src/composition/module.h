@@ -21,21 +21,19 @@ namespace synodic
 
 		// TODO: virtual constexpr
 		// virtual bool Priority() = 0;
-
 	};
 
 	// Default configuration implementation
 	template<typename Base, typename Derived>
 	class ImplementationConfiguration : public ModuleConfig<Base>
 	{
-	public:
-		constexpr ImplementationConfiguration() = default;
-		~ImplementationConfiguration()			= default;
 
-		constexpr uint8_t Priority()
+	public:
+		constexpr ImplementationConfiguration()
 		{
-			return 1;
-		}
+			static_assert(false, "ImplementationConfiguration<Base, Derived> needs to be declared");
+		};
+		~ImplementationConfiguration() = default;
 	};
 
 	// Static module configuration struct
@@ -85,6 +83,7 @@ namespace synodic
 					.template to<std::tuple_element_t<index, std::tuple<Implementations...>>>());
 		}
 
+		// Creation of types
 		template<typename T>
 		[[nodiscard]] constexpr auto Create() const
 		{
