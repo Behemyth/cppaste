@@ -9,7 +9,6 @@ class SynodicCoreConan(ConanFile):
 	requires = "doctest/2.4.0", "di/1.1.0"
 	generators = "cmake_find_package"
 	default_options  = {"di:with_extensions": True}
-	no_copy_source = True
 	scm = {
          "type": "git",
          "subfolder": "synodic-core",
@@ -19,7 +18,7 @@ class SynodicCoreConan(ConanFile):
 
 	def build(self):
 		cmake = CMake(self)
-		cmake.configure()
+		cmake.configure(source_folder="synodic-core")
 		cmake.build()
 
 	def package(self):
