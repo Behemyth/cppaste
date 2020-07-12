@@ -6,6 +6,7 @@
 #include <numeric>
 #include <tuple>
 
+// TODO: Dynamic Module
 // #include "boost/di/extension/providers/runtime_provider.hpp"
 
 namespace synodic
@@ -31,6 +32,7 @@ namespace synodic
 	public:
 		constexpr ImplementationConfiguration()
 		{
+			// TODO: Write Base and Derived type
 			static_assert(false, "ImplementationConfiguration<Base, Derived> needs to be declared");
 		};
 		~ImplementationConfiguration() = default;
@@ -90,9 +92,7 @@ namespace synodic
 			return Inject().template create<T>();
 		}
 
-		// Allow creation of templated types.
-		// Templated types must have a default type so that the proper implementation can be
-		// injected
+		// Creation of templated types
 		template<template<typename...> typename T>
 		[[nodiscard]] constexpr auto Create() const
 		{

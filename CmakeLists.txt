@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.17.2 FATAL_ERROR)
 
-#Set CMake tools location
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/Tools/CMake)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}) #TODO: remove with new Conan generator
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}) #TODO: remove with new Conan generator
 
@@ -14,7 +12,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON) # Group the default targets in a fo
 #Project 
 
 project(Core 
-	VERSION 0.0.1
+	VERSION 0.1.0
 	DESCRIPTION "Synodic Software's Core"
 	LANGUAGES CXX
 )
@@ -78,6 +76,6 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES SOURCES)
 if(BUILD_TESTS)
 
 	enable_testing()
-    add_subdirectory(Tests)
+    add_subdirectory(tests)
 
 endif()

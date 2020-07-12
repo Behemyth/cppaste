@@ -1,0 +1,9 @@
+= Synodic Core
+
+== Features
+
+=== Modules
+A concept oriented framework that manages dependencies, plugins, compilation for interchangeable interfaces. These are unrelated to C++ modules.
+
+=== System
+System information distilled into `constexpr` utility

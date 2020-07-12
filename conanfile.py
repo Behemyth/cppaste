@@ -2,7 +2,7 @@ from conans import ConanFile, CMake
 
 class SynodicCoreConan(ConanFile):
 	name = "synodic-core"
-	version = "0.1"
+	version = "0.1.0"
 	settings = "os", "compiler", "build_type", "arch"
 	requires = "doctest/2.4.0", "di/1.1.0"
 	generators = "cmake_find_package"
