@@ -4,6 +4,7 @@ import os
 
 class TestPackageConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
+    requires = "synodic-core/0.1.0"
     generators = "cmake"
 
     def build(self):
