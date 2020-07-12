@@ -1,26 +1,24 @@
-cmake_minimum_required(VERSION 3.15.2 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.17.2 FATAL_ERROR)
 
-#Set CMake tools location
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/Tools/CMake)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}) #TODO: remove with new Conan generator
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}) #TODO: remove with new Conan generator
 
-#Global Options
+# Global Options
 set(CMAKE_FIND_PACKAGE_PREFER_CONFIG ON) # Opposite module/PCF order for `find_package`
-include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON) # Group the default targets in a folder
+
 
 ##############################################
 #Project 
 
 project(tests 
-	VERSION 1.0.0
-	DESCRIPTION "Test project for the main project"
+	DESCRIPTION "Test project for Synodic Core"
 	LANGUAGES CXX
 )
 
 
 ##############################################
-#Project Target
+# Project Target
 
 add_executable(tests)
 
@@ -29,22 +27,24 @@ set_target_properties(tests
 		LINKER_LANGUAGE CXX
 		CXX_STANDARD 20
 		CXX_STANDARD_REQUIRED ON
+		CXX_EXTENSIONS NO
 )
 
 
 ##############################################
-#Dependencies
+# Dependencies
 
-find_package(doctest 2.3.7 REQUIRED)
+find_package(doctest 2.4.0 REQUIRED)
 
 target_link_libraries(tests
+PUBLIC
 	synodic::Core
     doctest::doctest
 )
 
 
 ##############################################
-#Sources
+# Sources
 
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/*)
 
