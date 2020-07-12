@@ -12,6 +12,7 @@ jobs:
     steps:
       - name: conan-upload
         uses: grisumbras/conan-upload@v0.3.0
-        login: ${{ secrets.CONAN_USER }}
-        password: ${{ secrets.CONAN_PASSSWORD }}
-        url: ${{ secrets.CONAN_SERVER }}
+        with:
+          login: ${{ secrets.CONAN_USER }}
+          password: ${{ secrets.CONAN_PASSSWORD }}
+          url: ${{ secrets.CONAN_SERVER }}
