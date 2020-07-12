@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "composition/module.h"
+#include "synodic/composition/module.h"
 
 
 class Interface

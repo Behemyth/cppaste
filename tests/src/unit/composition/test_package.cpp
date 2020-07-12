@@ -1,4 +1,4 @@
-#include "composition/package.h"
+#include "synodic/composition/package.h"
 #include "doctest/doctest.h"
 #include "types.h"
 

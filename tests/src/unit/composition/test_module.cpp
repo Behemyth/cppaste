@@ -1,3 +1,4 @@
+#include "synodic/composition/module.h"
 #include "doctest/doctest.h"
 #include "types.h"
 
