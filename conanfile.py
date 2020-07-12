@@ -19,7 +19,7 @@ class SynodicCoreConan(ConanFile):
 
 	def build(self):
 		cmake = CMake(self)
-		cmake.configure(source_folder="synodic-core")
+		cmake.configure()
 		cmake.build()
 
 	def package(self):
