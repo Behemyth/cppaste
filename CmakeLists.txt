@@ -7,26 +7,15 @@ list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}) #TODO: remove with new Conan 
 set(CMAKE_FIND_PACKAGE_PREFER_CONFIG ON) # Opposite module/PCF order for `find_package`
 set_property(GLOBAL PROPERTY USE_FOLDERS ON) # Group the default targets in a folder
 
-
-##############################################
-#Project 
-
 project(Core 
 	VERSION 0.1.0
 	DESCRIPTION "Synodic Software's Core"
 	LANGUAGES CXX
 )
 
-
-##############################################
-#Options
-
 option(BUILD_TESTS "Build test projects" ON)
 option(BUILD_SHARED_LIBS "Build shared library" OFF)
 
-
-##############################################
-#Project Target
 
 add_library(Core)
 add_library(synodic::Core ALIAS Core)
@@ -40,14 +29,7 @@ PROPERTIES
 )
 
 
-##############################################
-#Dependencies
-
 #find_package(di 1.1 REQUIRED)
-
-
-##############################################
-#Sources
 
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/*)
 
@@ -70,8 +52,6 @@ PRIVATE
 #Provides Visual Studio filter support
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES SOURCES)
 
-##############################################
-#Subprojects
 
 if(BUILD_TESTS)
 

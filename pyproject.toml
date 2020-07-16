@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "synodic-core"
+version = "0.1.0"
+description = ""
+
+license = "GPL-v3"
+
+authors = [
+    "Synodic Software"
+]
+
+readme = "README.adoc"
+
+repository = "https://github.com/Synodic-Software/Synodic-Core"
+homepage = "https://github.com/Synodic-Software/Synodic-Core"
+
+
+[tool.poetry.dependencies]
+python  = "^3.8"
+conan = "^1.27"
+
+
+[build-system]
+requires        = ["poetry>=1.0"]
+build-backend   = "poetry.masonry.api"
