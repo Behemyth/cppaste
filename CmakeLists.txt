@@ -29,13 +29,12 @@ PROPERTIES
 )
 
 
-#find_package(di 1.1 REQUIRED)
+find_package(di 1.2 REQUIRED)
 
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/*)
 
 target_include_directories(Core
 PUBLIC
-	${CMAKE_CURRENT_SOURCE_DIR}/external
 	${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
@@ -45,8 +44,8 @@ PRIVATE
 )
 
 target_link_libraries(Core
-PRIVATE
-	#di::di
+PUBLIC
+	di::di
 )
 
 #Provides Visual Studio filter support
