@@ -1,9 +1,9 @@
 [tool.poetry]
-name = "synodic-core"
+name = "cppaste"
 version = "0.1.0"
 description = ""
 
-license = "GPL-v3"
+license = "MIT"
 
 authors = [
     "Synodic Software"
@@ -11,8 +11,8 @@ authors = [
 
 readme = "README.adoc"
 
-repository = "https://github.com/Synodic-Software/Synodic-Core"
-homepage = "https://github.com/Synodic-Software/Synodic-Core"
+repository = "https://github.com/Synodic-Software/CPPaste"
+homepage = "https://github.com/Synodic-Software/CPPaste"
 
 
 [tool.poetry.dependencies]

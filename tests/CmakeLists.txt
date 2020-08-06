@@ -29,7 +29,7 @@ find_package(doctest 2.4.0 REQUIRED)
 
 target_link_libraries(tests
 PUBLIC
-	synodic::Core
+	${CMAKE_PROJECT_NAME}
     doctest::doctest
 )
 
