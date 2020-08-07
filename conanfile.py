@@ -8,22 +8,21 @@ class SynodicCoreConan(ConanFile):
 	settings = "os", "compiler", "build_type", "arch"
 	requires = "doctest/2.4.0", "di/1.2.0"
 	generators = "cmake_find_package"
-	default_options  = {"di:with_extensions": True}
+	default_options = {"di:with_extensions": True}
 	scm = {
          "type": "git",
-         "subfolder": "cppaste",
          "url": "auto",
          "revision": "auto",
-     }
+    }
 
 	def build(self):
 		cmake = CMake(self)
-		cmake.configure(source_folder="cppaste")
+		cmake.configure()
 		cmake.build()
 
 	def package(self):
-		self.copy("*.h", dst="include", src="cppaste")
-		self.copy("*cppaste.lib", dst="lib", keep_path=False)
+		self.copy("*.h", dst="include")
+		self.copy("*.lib", dst="lib", keep_path=False)
 		self.copy("*.dll", dst="bin", keep_path=False)
 		self.copy("*.so", dst="lib", keep_path=False)
 		self.copy("*.dylib", dst="lib", keep_path=False)
@@ -31,3 +30,7 @@ class SynodicCoreConan(ConanFile):
 
 	def package_info(self):
 		self.cpp_info.libs = ["cppaste"]
+
+		# If the the package is in editable mode, forward the library path
+		if not self.in_local_cache:
+			self.cpp_info.libdirs = ["build"]
