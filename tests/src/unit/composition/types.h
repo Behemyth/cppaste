@@ -28,7 +28,7 @@ private:
 class UniquePtrApp
 {
 public:
-	explicit UniquePtrApp(std::unique_ptr<Interface> implementation) : value_(implementation->Get())
+	explicit UniquePtrApp(std::unique_ptr<InterfaceA> implementation) : value_(implementation->Get())
 	{
 	}
 	~UniquePtrApp() = default;
@@ -42,7 +42,7 @@ private:
 	int value_;
 };
 
-template<typename InterfaceType = class Interface>
+template<typename InterfaceType = class InterfaceA>
 class TemplateApp
 {
 public:
@@ -60,7 +60,7 @@ private:
 	int value_;
 };
 
-template<typename InterfaceType = class InterfaceWithTemplateFunction>
+template<typename InterfaceType = class InterfaceB>
 class TemplateFunctionApp
 {
 public:

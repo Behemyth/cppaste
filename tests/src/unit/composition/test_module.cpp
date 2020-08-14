@@ -8,12 +8,12 @@ TEST_SUITE("Dynamic Polymorphic Injection")
 
 	TEST_CASE("Single Implementation")
 	{
-		const synodic::StaticModuleParameters params;
-		const auto dynamicModule = synodic::CreateStaticModule<Interface, ImplementationA>(params);
+		const synodic::ModuleParameters params;
+		const auto module = synodic::CreateModule<InterfaceAM, ImplementationAM>(params);
 
 		SUBCASE("reference")
 		{
-			const auto app = dynamicModule.Create<ReferenceApp>();
+			const auto app = module.Create<ReferenceApp>();
 
 			CHECK(app.Get() == 3);
 		}
@@ -21,13 +21,13 @@ TEST_SUITE("Dynamic Polymorphic Injection")
 
 	TEST_CASE("Multiple Implementations")
 	{
-		const synodic::StaticModuleParameters params;
-		const auto dynamicModule =
-			synodic::CreateStaticModule<Interface, ImplementationA, ImplementationB>(params);
+		const synodic::ModuleParameters params;
+		const auto module =
+			synodic::CreateModule<InterfaceAM, ImplementationAM, ImplementationBM>(params);
 
 		SUBCASE("reference")
 		{
-			const auto app = dynamicModule.Create<ReferenceApp>();
+			const auto app = module.Create<ReferenceApp>();
 
 			CHECK(app.Get() == 3);
 		}
@@ -35,16 +35,16 @@ TEST_SUITE("Dynamic Polymorphic Injection")
 }
 
 
-TEST_SUITE("Static Polymorphic Injection")
+TEST_SUITE(" Polymorphic Injection")
 {
 	TEST_CASE("Single Implementation")
 	{
-		const synodic::StaticModuleParameters params;
-		const auto staticModule = synodic::CreateStaticModule<Interface, ImplementationA>(params);
+		const synodic::ModuleParameters params;
+		const auto module = synodic::CreateModule<InterfaceAM, ImplementationAM>(params);
 
 		SUBCASE("Template")
 		{
-			const auto app = staticModule.Create<TemplateApp>();
+			const auto app = module.Create<TemplateApp>();
 
 			CHECK(app.Get() == 3);
 		}
@@ -52,13 +52,13 @@ TEST_SUITE("Static Polymorphic Injection")
 
 	TEST_CASE("Multiple Implementations")
 	{
-		const synodic::StaticModuleParameters params;
-		const auto staticModule =
-			synodic::CreateStaticModule<Interface, ImplementationA, ImplementationB>(params);
+		const synodic::ModuleParameters params;
+		const auto module =
+			synodic::CreateModule<InterfaceAM, ImplementationAM, ImplementationBM>(params);
 
 		SUBCASE("Template")
 		{
-			const auto app = staticModule.Create<TemplateApp>();
+			const auto app = module.Create<TemplateApp>();
 
 			CHECK(app.Get() == 3);
 		}
@@ -66,13 +66,13 @@ TEST_SUITE("Static Polymorphic Injection")
 
 	TEST_CASE("Template Function")
 	{
-		const synodic::StaticModuleParameters params;
-		const auto staticModule = synodic::CreateStaticModule<
-			InterfaceWithTemplateFunction, ImplementationWithTemplateFunction>(params);
+		const synodic::ModuleParameters params;
+		const auto module = synodic::CreateModule<
+			InterfaceBM, ImplementationCM>(params);
 
 		SUBCASE("Template")
 		{
-			const auto app = staticModule.Create<TemplateFunctionApp>();
+			const auto app = module.Create<TemplateFunctionApp>();
 
 			CHECK(app.Get() == 3);
 		}

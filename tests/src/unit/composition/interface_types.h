@@ -2,22 +2,34 @@
 
 #pragma once
 
+#include "synodic/composition/module.h"
 
-class Interface
+class InterfaceA
 {
 public:
-	Interface()			 = default;
-	virtual ~Interface() = default;
+	InterfaceA()		  = default;
+	virtual ~InterfaceA() = default;
 
 	[[nodiscard]] virtual int Get() const = 0;
 };
 
-class InterfaceWithTemplateFunction
+class InterfaceAM final : synodic::ModuleInterface<InterfaceA, InterfaceAM>
+{
+};
+
+class InterfaceB
 {
 public:
-	InterfaceWithTemplateFunction()			 = default;
-	virtual ~InterfaceWithTemplateFunction() = default;
+	InterfaceB()		  = default;
+	virtual ~InterfaceB() = default;
 
 	template<typename T>
-	[[nodiscard]] int Get() const;
+	[[nodiscard]] int Get() const
+	{
+		return 3;
+	}
+};
+
+class InterfaceBM final : synodic::ModuleInterface<InterfaceB, InterfaceBM>
+{
 };

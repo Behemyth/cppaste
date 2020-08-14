@@ -2,14 +2,13 @@
 
 #pragma once
 
-#include "synodic/composition/module.h"
 #include "interface_types.h"
+#include "synodic/composition/module.h"
 
-class ImplementationWithTemplateFunction : public InterfaceWithTemplateFunction
+class ImplementationC : public InterfaceB
 {
 public:
-	ImplementationWithTemplateFunction()		   = default;
-	~ImplementationWithTemplateFunction() override = default;
+	constexpr ImplementationC() = default;
 
 	template<typename T>
 	[[nodiscard]] T Get() const
@@ -18,14 +17,11 @@ public:
 	}
 };
 
-template<>
-class synodic::
-	ImplementationConfiguration<InterfaceWithTemplateFunction, ImplementationWithTemplateFunction> :
-	public ModuleConfig<InterfaceWithTemplateFunction>
+class ImplementationCM :
+	public synodic::ModuleImplementation<InterfaceB, ImplementationC, ImplementationCM>
 {
 public:
-	ImplementationConfiguration()  = default;
-	~ImplementationConfiguration() = default;
+	constexpr ImplementationCM() = default;
 
 	constexpr uint8_t Priority()
 	{
@@ -33,11 +29,10 @@ public:
 	}
 };
 
-class ImplementationA : public Interface
+class ImplementationA : public InterfaceA
 {
 public:
-	ImplementationA()			= default;
-	~ImplementationA() override = default;
+	constexpr ImplementationA() = default;
 
 	[[nodiscard]] int Get() const override
 	{
@@ -45,13 +40,11 @@ public:
 	}
 };
 
-template<>
-class synodic::ImplementationConfiguration<Interface, ImplementationA> :
-	public ModuleConfig<Interface>
+class ImplementationAM :
+	public synodic::ModuleImplementation<InterfaceA, ImplementationA, ImplementationAM>
 {
 public:
-	ImplementationConfiguration()  = default;
-	~ImplementationConfiguration() = default;
+	constexpr ImplementationAM() = default;
 
 	constexpr uint8_t Priority()
 	{
@@ -59,11 +52,10 @@ public:
 	}
 };
 
-class ImplementationB : public Interface
+class ImplementationB : public InterfaceA
 {
 public:
-	ImplementationB()			= default;
-	~ImplementationB() override = default;
+	constexpr ImplementationB() = default;
 
 	[[nodiscard]] int Get() const override
 	{
@@ -71,13 +63,11 @@ public:
 	}
 };
 
-template<>
-class synodic::ImplementationConfiguration<Interface, ImplementationB> :
-	public ModuleConfig<Interface>
+class ImplementationBM :
+	public synodic::ModuleImplementation<InterfaceA, ImplementationB, ImplementationBM>
 {
 public:
-	ImplementationConfiguration()  = default;
-	~ImplementationConfiguration() = default;
+	constexpr ImplementationBM() = default;
 
 	constexpr uint8_t Priority()
 	{

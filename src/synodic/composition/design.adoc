@@ -4,7 +4,7 @@
 
 Modules are components of a top level application that provide composable behaviors and type injection.
 
-=== Static Modules
+===  Modules
 
 Compile time builder that injects an implementation type for each interface it's provided with
 

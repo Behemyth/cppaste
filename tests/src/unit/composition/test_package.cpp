@@ -7,10 +7,10 @@ TEST_SUITE("Dynamic Polymorphic Injection")
 {
 	TEST_CASE("Single Implementation")
 	{
-		const synodic::StaticModuleParameters params;
-		const auto dynamicModule = synodic::CreateStaticModule<Interface, ImplementationA>(params);
+		const synodic::ModuleParameters params;
+		const auto module = synodic::CreateModule<InterfaceAM, ImplementationAM>(params);
 
-		const auto package = synodic::Package(dynamicModule);
+		const auto package = synodic::Package(module);
 
 		SUBCASE("unique_ptr")
 		{
@@ -22,11 +22,11 @@ TEST_SUITE("Dynamic Polymorphic Injection")
 
 	TEST_CASE("Multiple Implementations")
 	{
-		const synodic::StaticModuleParameters params;
-		const auto dynamicModule =
-			synodic::CreateStaticModule<Interface, ImplementationA, ImplementationB>(params);
+		const synodic::ModuleParameters params;
+		const auto module =
+			synodic::CreateModule<InterfaceAM, ImplementationAM, ImplementationBM>(params);
 
-		const auto package = synodic::Package(dynamicModule);
+		const auto package = synodic::Package(module);
 
 		SUBCASE("unique_ptr")
 		{
@@ -37,14 +37,14 @@ TEST_SUITE("Dynamic Polymorphic Injection")
 	}
 }
 
-TEST_SUITE("Static Polymorphic Injection")
+TEST_SUITE(" Polymorphic Injection")
 {
 	TEST_CASE("Single Implementation")
 	{
-		const synodic::StaticModuleParameters params;
-		const auto staticModule = synodic::CreateStaticModule<Interface, ImplementationA>(params);
+		const synodic::ModuleParameters params;
+		const auto module = synodic::CreateModule<InterfaceAM, ImplementationAM>(params);
 
-		const auto package = synodic::Package(staticModule);
+		const auto package = synodic::Package(module);
 
 		SUBCASE("Template")
 		{
@@ -56,11 +56,11 @@ TEST_SUITE("Static Polymorphic Injection")
 
 	TEST_CASE("Multiple Implementations")
 	{
-		const synodic::StaticModuleParameters params;
-		const auto staticModule =
-			synodic::CreateStaticModule<Interface, ImplementationA, ImplementationB>(params);
+		const synodic::ModuleParameters params;
+		const auto module =
+			synodic::CreateModule<InterfaceAM, ImplementationAM, ImplementationBM>(params);
 
-		const auto package = synodic::Package(staticModule);
+		const auto package = synodic::Package(module);
 
 		SUBCASE("Template")
 		{
