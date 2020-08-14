@@ -18,7 +18,7 @@ public:
 };
 
 class ImplementationCM :
-	public synodic::ModuleImplementation<InterfaceB, ImplementationC, ImplementationCM>
+	public synodic::ModuleImplementation<InterfaceB, ImplementationC>
 {
 public:
 	constexpr ImplementationCM() = default;
@@ -41,7 +41,7 @@ public:
 };
 
 class ImplementationAM :
-	public synodic::ModuleImplementation<InterfaceA, ImplementationA, ImplementationAM>
+	public synodic::ModuleImplementation<InterfaceA, ImplementationA>
 {
 public:
 	constexpr ImplementationAM() = default;
@@ -64,7 +64,7 @@ public:
 };
 
 class ImplementationBM :
-	public synodic::ModuleImplementation<InterfaceA, ImplementationB, ImplementationBM>
+	public synodic::ModuleImplementation<InterfaceA, ImplementationB>
 {
 public:
 	constexpr ImplementationBM() = default;

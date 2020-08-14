@@ -9,6 +9,7 @@
 // TODO: Dynamic Module
 // #include "boost/di/extension/providers/runtime_provider.hpp"
 
+
 namespace synodic
 {
 
@@ -16,11 +17,11 @@ namespace synodic
 	/// @brief Module Configuration for an Interface type
 	///--------------------------------------------------------------------------------
 
-	template<typename Base, typename Interface>
+	template<typename Interface>
 	class ModuleInterface
 	{
 	public:
-		using BaseType = Base;
+		using InterfaceType = Interface;
 
 		constexpr ModuleInterface() = default;
 		// constexpr virtual ~ModuleInterface() = default;
@@ -30,12 +31,12 @@ namespace synodic
 	/// @brief Module Configuration for an Implementation type
 	///--------------------------------------------------------------------------------
 
-	template<typename Base, typename Derived, typename Implementation>
+	template<typename Interface, typename Implementation>
 	class ModuleImplementation
 	{
 	public:
-		using BaseType	  = Base;
-		using DerivedType = Derived;
+		using InterfaceType	  = Interface;
+		using ImplementationType = Implementation;
 
 		constexpr ModuleImplementation() = default;
 		// constexpr virtual ~ModuleImplementation() = default;
@@ -61,7 +62,7 @@ namespace synodic
 	class Module final
 	{
 		template<typename Base, typename... Derived>
-		friend constexpr auto CreateModule(const ModuleParameters& parameters);
+		friend auto CreateModule(const ModuleParameters& parameters);
 
 	public:
 		[[nodiscard]] constexpr auto Inject() const;
@@ -102,9 +103,9 @@ namespace synodic
 
 		// Bind a single type to the interface.
 		return boost::di::make_injector(
-			boost::di::bind<typename Interface::BaseType>()
+			boost::di::bind<typename Interface::InterfaceType>()
 				.template to<std::tuple_element_t<
-					index, std::tuple<typename Implementations::DerivedType...>>>());
+					index, std::tuple<typename Implementations::ImplementationType...>>>());
 	}
 
 	// Creation of types
@@ -130,8 +131,9 @@ namespace synodic
 
 	// Creates a static module which is evaluated at compile time.
 	// TODO: Remove Implementations template
+	// TODO: Constrain type
 	template<typename Interface, typename... Implementations>
-	constexpr auto CreateModule(const ModuleParameters& parameters)
+	auto CreateModule(const ModuleParameters& parameters)
 	{
 		// TODO: Pass along all types deriving from Interface c++23, reflection
 		return Module<Interface, Implementations...>(parameters);

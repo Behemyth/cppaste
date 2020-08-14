@@ -13,7 +13,7 @@ public:
 	[[nodiscard]] virtual int Get() const = 0;
 };
 
-class InterfaceAM final : synodic::ModuleInterface<InterfaceA, InterfaceAM>
+class InterfaceAM final : synodic::ModuleInterface<InterfaceA>
 {
 };
 
@@ -30,6 +30,6 @@ public:
 	}
 };
 
-class InterfaceBM final : synodic::ModuleInterface<InterfaceB, InterfaceBM>
+class InterfaceBM final : synodic::ModuleInterface<InterfaceB>
 {
 };
