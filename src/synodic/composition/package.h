@@ -33,7 +33,7 @@ namespace synodic
 	// TODO: Constrain Module type
 	template<typename... Modules>
 	constexpr Package<Modules...>::Package(const Modules&... modules) :
-		modules_(std::forward_as_tuple(modules)...)
+		modules_(modules...)
 	{
 	}
 

@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <array>
 #include <boost/di.hpp>
-#include <concepts>
 #include <tuple>
 
 // TODO: Dynamic Module
@@ -12,6 +11,20 @@
 
 namespace synodic
 {
+
+	// TODO: Use
+	// TODO: Move from 'detail' and don't export
+	namespace detail
+	{
+		template<template<typename...> class T, typename... Ts>
+		std::true_type derived_from_impl(const T<Ts...>&);
+
+		template<template<typename...> class T>
+		std::false_type derived_from_impl(...);
+
+		template<class Derived, template<typename...> class Base>
+		concept derived_from = decltype(derived_from_impl<Base>(std::declval<Derived>()))::value;
+	}
 
 	///--------------------------------------------------------------------------------
 	/// @brief Module Configuration for an Interface type
@@ -99,7 +112,7 @@ namespace synodic
 			"There must be at least one implementation that gets instantiated.");
 
 		// TODO: Replace std::distance with extracted index value
-		constexpr auto index = std::distance(priorities.begin(), itr);
+		constexpr auto index = static_cast<size_t>(std::distance(priorities.begin(), itr));
 
 		// Bind a single type to the interface.
 		return boost::di::make_injector(
