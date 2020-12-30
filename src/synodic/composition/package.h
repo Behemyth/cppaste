@@ -42,8 +42,8 @@ namespace synodic
 	constexpr auto Package<Modules...>::Inject() const
 	{
 		return std::apply(
-			[](auto&... module) {
-				return boost::di::make_injector(module.Inject()...);
+			[](auto&... synodicModule) {
+				return boost::di::make_injector(synodicModule.Inject()...);
 			},
 			modules_);
 	}

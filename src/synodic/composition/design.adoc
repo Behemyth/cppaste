@@ -2,15 +2,27 @@
 
 == Modules
 
-Modules are components of a top level application that provide composable behaviors and type injection.
+Modules are a component based framework that provide composable behaviors and type injection with polymorphic properties.
 
-===  Modules
+=== Comparison of Polymorphic Types
 
-Compile time builder that injects an implementation type for each interface it's provided with
+==== Templates with Concepts
 
-=== Dynamic Modules
+.Advantages
+- TODO
 
-Runtime module builders that also handle loading modules found in DLLs
+.Disadvantages
+- TODO
+
+==== Inheritance
+
+.Advantages
+- TODO
+
+.Disadvantages
+- TODO
+
+
 
 == Package
 
@@ -19,3 +31,4 @@ A collection of modules
 == Plugins
 
 Application unaware composition
+

@@ -16,8 +16,8 @@ homepage = "https://github.com/Synodic-Software/CPPaste"
 
 
 [tool.poetry.dependencies]
-python  = "^3.8"
-conan = "^1.27"
+python  = "^3.9"
+conan = "^1.31"
 
 
 [build-system]

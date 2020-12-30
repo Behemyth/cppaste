@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.17.2 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.18.2 FATAL_ERROR)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}) #TODO: remove with new Conan generator
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}) #TODO: remove with new Conan generator
@@ -25,7 +25,7 @@ set_target_properties(tests
 )
 
 
-find_package(doctest 2.4.0 REQUIRED)
+find_package(doctest 2.4.1 REQUIRED)
 
 target_link_libraries(tests
 PUBLIC

@@ -6,7 +6,7 @@ class SynodicCoreConan(ConanFile):
 	license = "MIT"
 	homepage = "https://github.com/Synodic-Software/CPPaste"
 	settings = "os", "compiler", "build_type", "arch"
-	requires = "doctest/2.4.0", "di/1.2.0"
+	requires = "doctest/2.4.1", "di/1.2.0"
 	generators = "cmake_find_package"
 	default_options = {"di:with_extensions": True}
 	scm = {
