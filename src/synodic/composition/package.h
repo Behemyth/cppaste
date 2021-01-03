@@ -1,7 +1,5 @@
 #pragma once
 
-#include <boost/di.hpp>
-
 #include "module.h"
 
 namespace synodic
@@ -41,11 +39,11 @@ namespace synodic
 	template<typename... Modules>
 	constexpr auto Package<Modules...>::Inject() const
 	{
-		return std::apply(
+		return false; /*std::apply(
 			[](auto&... synodicModule) {
 				return boost::di::make_injector(synodicModule.Inject()...);
 			},
-			modules_);
+			modules_);*/
 	}
 	
 	// Create type

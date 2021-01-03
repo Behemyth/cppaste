@@ -28,9 +28,6 @@ PROPERTIES
 	CXX_EXTENSIONS NO
 )
 
-
-find_package(di 1.2 REQUIRED)
-
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/*)
 
 target_include_directories(${PROJECT_NAME}
@@ -45,7 +42,6 @@ PRIVATE
 
 target_link_libraries(${PROJECT_NAME}
 PUBLIC
-	di::di
 )
 
 #Provides Visual Studio filter support
