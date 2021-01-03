@@ -4,17 +4,17 @@
 #include "dynamic_application_types.h"
 
 
-TEST_SUITE("Polymorphic Injection")
-{
-	TEST_CASE("Single Modules")
-	{
-		const synodic::ModuleParameters params;
-		const auto synodicModule = synodic::CreateModule<DynamicInterfaceA, DynamicImplementationA>(params);
-
-		const auto package = synodic::Package(synodicModule);
-		const auto app	   = package.Create<UniquePtrApp>();
-
-		CHECK(app.Get() == 3);
-	}
-	
-}
+//TEST_SUITE("Polymorphic Injection")
+//{
+//	TEST_CASE("Single Modules")
+//	{
+//		const synodic::ModuleParameters params;
+//		const auto synodicModule = synodic::CreateModule<DynamicInterfaceA, DynamicImplementationA>(params);
+//
+//		const auto package = synodic::Package(synodicModule);
+//		const auto app	   = package.Create<UniquePtrApp>();
+//
+//		CHECK(app.Get() == 3);
+//	}
+//	
+//}

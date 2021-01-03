@@ -2,7 +2,8 @@
 
 #pragma once
 
-#include "static_implementation_types.h"
+#include "static_interface_types.h"
+
 
 template<typename InterfaceType = StaticInterfaceA>
 class TemplateApp

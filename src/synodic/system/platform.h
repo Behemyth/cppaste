@@ -1,36 +1,67 @@
 #pragma once
 
-enum class PlatformID { WINDOWS, OSX, LINUX, ANDROID, UNKNOWN };
+enum class PlatformID
+{
+	WINDOWS,
+	OSX,
+	LINUX,
+	ANDROID,
+	UNKNOWN
+};
 
-class Platform {
+#define SYNODIC_PLATFORM(X) SYNODIC_PLATFORM_PRIVATE_##X()
+
+class Platform
+{
 
 public:
-
 	constexpr static PlatformID GetPlatform();
-	constexpr static bool IsDesktop();
 
 private:
-
-	#if defined(__linux__) && !defined(__ANDROID__)
-
-	constexpr static PlatformID platform_ = PlatformID::LINUX;
-
-	#elif defined(_WIN64)
+#if defined(_WIN64)
 
 	constexpr static PlatformID platform_ = PlatformID::WINDOWS;
+#	define SYNODIC_PLATFORM_PRIVATE_WINDOWS() 1
+#	define SYNODIC_PLATFORM_PRIVATE_OSX()	   0
+#	define SYNODIC_PLATFORM_PRIVATE_LINUX()   0
+#	define SYNODIC_PLATFORM_PRIVATE_ANDROID() 0
+#	define SYNODIC_PLATFORM_PRIVATE_UNKNOWN() 0
 
-	#elif defined(__APPLE__)
+#elif defined(__APPLE__)
 
 	constexpr static PlatformID platform_ = PlatformID::OSX;
+#	define SYNODIC_PLATFORM_PRIVATE_WINDOWS() 0
+#	define SYNODIC_PLATFORM_PRIVATE_OSX()	   1
+#	define SYNODIC_PLATFORM_PRIVATE_LINUX()   0
+#	define SYNODIC_PLATFORM_PRIVATE_ANDROID() 0
+#	define SYNODIC_PLATFORM_PRIVATE_UNKNOWN() 0
 
-	#elif defined(__ANDROID__) 
+#elif defined(__linux__) && !defined(__ANDROID__)
+
+	constexpr static PlatformID platform_ = PlatformID::LINUX;
+#	define SYNODIC_PLATFORM_PRIVATE_WINDOWS() 0
+#	define SYNODIC_PLATFORM_PRIVATE_OSX()	   0
+#	define SYNODIC_PLATFORM_PRIVATE_LINUX()   1
+#	define SYNODIC_PLATFORM_PRIVATE_ANDROID() 0
+#	define SYNODIC_PLATFORM_PRIVATE_UNKNOWN() 0
+
+#elif defined(__ANDROID__)
 
 	constexpr static PlatformID platform_ = PlatformID::ANDROID;
+#	define SYNODIC_PLATFORM_PRIVATE_WINDOWS() 0
+#	define SYNODIC_PLATFORM_PRIVATE_OSX()	   0
+#	define SYNODIC_PLATFORM_PRIVATE_LINUX()   0
+#	define SYNODIC_PLATFORM_PRIVATE_ANDROID() 1
+#	define SYNODIC_PLATFORM_PRIVATE_UNKNOWN() 0
 
-	#else
+#else
 
 	constexpr static PlatformID platform_ = PlatformID::UNKNOWN;
+#	define SYNODIC_PLATFORM_PRIVATE_WINDOWS() 0
+#	define SYNODIC_PLATFORM_PRIVATE_OSX()	   0
+#	define SYNODIC_PLATFORM_PRIVATE_LINUX()   0
+#	define SYNODIC_PLATFORM_PRIVATE_ANDROID() 0
+#	define SYNODIC_PLATFORM_PRIVATE_UNKNOWN() 1
 
-	#endif
-
+#endif
 };

@@ -16,7 +16,8 @@ concept interface_a_concept = requires(T object)
 class StaticInterfaceA : public synodic::StaticInterface<StaticInterfaceA>
 {
 public:
-	
+	constexpr StaticInterfaceA() = default;
+
 	template<typename T>
 	static constexpr bool ValidateModule()
 	{
@@ -36,8 +37,9 @@ concept interface_b_concept = requires(T object)
 class StaticInterfaceB : public synodic::StaticInterface<StaticInterfaceB>
 {
 public:
+	constexpr StaticInterfaceB() = default;
 
-	
+
 	template<typename T>
 	static constexpr bool ValidateModule()
 	{

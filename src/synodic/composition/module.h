@@ -6,9 +6,6 @@
 #include <numeric>
 #include <tuple>
 
-// TODO: Dynamic ModuleBase
-// #include "boost/di/extension/providers/runtime_provider.hpp"
-
 
 namespace synodic
 {
@@ -48,15 +45,15 @@ namespace synodic
 		consteval StaticInterface() = default;
 	};
 
-	template<class T>
-	concept is_dynamic_interface = true;
+	//template<class T>
+	//concept is_dynamic_interface = true;
 
-	template<is_dynamic_interface Interface>
-	class DynamicInterface
-	{
-	public:
-		constexpr DynamicInterface() = default;
-	};
+	//template<is_dynamic_interface Interface>
+	//class DynamicInterface
+	//{
+	//public:
+	//	constexpr DynamicInterface() = default;
+	//};
 
 
 	///--------------------------------------------------------------------------------
@@ -78,16 +75,16 @@ namespace synodic
 	};
 
 
-	template<class Derived, class Base>
-	concept is_dynamic_implementation =
-		!std::is_same_v<Derived, Base> && std::derived_from<Base, DynamicInterface<Base>>;
+	//template<class Derived, class Base>
+	//concept is_dynamic_implementation =
+	//	!std::is_same_v<Derived, Base> && std::derived_from<Base, DynamicInterface<Base>>;
 
-	template<is_dynamic_interface Interface, is_dynamic_implementation<Interface> Implementation>
-	class DynamicImplementation : public Interface
-	{
-	public:
-		constexpr DynamicImplementation() = default;
-	};
+	//template<is_dynamic_interface Interface, is_dynamic_implementation<Interface> Implementation>
+	//class DynamicImplementation : public Interface
+	//{
+	//public:
+	//	constexpr DynamicImplementation() = default;
+	//};
 
 
 	///--------------------------------------------------------------------------------
@@ -108,8 +105,6 @@ namespace synodic
 	{
 
 	public:
-		[[nodiscard]] constexpr auto Inject() const;
-
 		template<typename T>
 		[[nodiscard]] constexpr auto Create() const;
 		template<template<typename...> typename T>
@@ -119,59 +114,27 @@ namespace synodic
 		explicit constexpr ModuleBase(const ModuleParameters& parameters);
 	};
 
-	// Create injector for the class interface
-	template<typename Interface, typename... Implementations>
-	constexpr auto ModuleBase<Interface, Implementations...>::Inject() const
-	{
+	//// Creation of types
+	//template<typename Interface, typename... Implementations>
+	//template<typename T>
+	//constexpr auto ModuleBase<Interface, Implementations...>::Create() const
+	//{
+	//	return Inject().template create<T>();
+	//}
 
-		// Generate array of priorities
-		constexpr std::array<uint8_t, sizeof...(Implementations)> priorities = {
-			{Implementations::Priority()...}};
-
-		// TODO: Create index range
-
-		// TODO: Sort the indices by priority value, highest priority first
-
-		// Find the first implementation with the highest priority
-		constexpr auto itr = std::find_if(priorities.begin(), priorities.end(), [](auto priority) {
-			return priority > 0;
-		});
-
-		static_assert(
-			itr != priorities.cend(),
-			"There must be at least one implementation that gets instantiated.");
-
-		// TODO: Replace std::distance with extracted index value
-		constexpr auto index = static_cast<size_t>(std::distance(priorities.begin(), itr));
-
-		// Bind a single type to the interface.
-		return boost::di::make_injector(
-			boost::di::bind<Interface>()
-				.template to<std::tuple_element_t<index, std::tuple<Implementations...>>>());
-	}
-
-	// Creation of types
-	template<typename Interface, typename... Implementations>
-	template<typename T>
-	constexpr auto ModuleBase<Interface, Implementations...>::Create() const
-	{
-		return Inject().template create<T>();
-	}
-
-	// Creation of templated types
-	template<typename Interface, typename... Implementations>
-	template<template<typename...> typename T>
-	constexpr auto ModuleBase<Interface, Implementations...>::Create() const
-	{
-		return Inject().template create<T>();
-	}
+	//// Creation of templated types
+	//template<typename Interface, typename... Implementations>
+	//template<template<typename...> typename T>
+	//constexpr auto ModuleBase<Interface, Implementations...>::Create() const
+	//{
+	//	return Inject().template create<T>();
+	//}
 
 	template<typename Interface, typename... Implementations>
 	constexpr ModuleBase<Interface, Implementations...>::ModuleBase(
 		const ModuleParameters& parameters)
 	{
 	}
-
 
 	///--------------------------------------------------------------------------------
 	/// @brief StaticModule
@@ -184,6 +147,10 @@ namespace synodic
 		template<is_static_interface Base, is_static_implementation<Base>... Derived>
 		friend constexpr auto CreateModule(const ModuleParameters& parameters);
 
+	public:
+		constexpr auto Inject() const;
+
+	private:
 		explicit constexpr StaticModule(const ModuleParameters& parameters);
 	};
 
@@ -194,40 +161,73 @@ namespace synodic
 	{
 	}
 
+	// Create injector for the class interface
+	template<is_static_interface Interface, is_static_implementation<Interface>... Implementations>
+	constexpr auto StaticModule<Interface, Implementations...>::Inject() const
+	{
+
+		// Generate array of enabled values
+		std::array<bool, sizeof...(Implementations)> enables = {{Implementations::Enabled()...}};
+
+		// Generate array of priorities
+		std::array<uint8_t, sizeof...(Implementations)> priorities = {
+			{Implementations::Priority()...}};
+
+		// Create index range
+		std::array<int, sizeof...(Implementations)> indices;
+		std::iota(indices.begin(), indices.end(), 0);
+
+		// Sort the indices by priority value, highest priority first
+		std::sort(indices.begin(), indices.end(), [&priorities](int left, int right) {
+			return priorities[left] > priorities[right];
+		});
+
+		// Find the first implementation with the highest priority that is enabled
+		auto index =
+			*std::find_if(indices.begin(), indices.end(), [&priorities, &enables](int index) {
+				return priorities[index] > 0 && enables[index];
+			});
+
+		// Bind a single type to the interface.
+		return boost::di::make_injector(
+			boost::di::bind<Interface>()
+				.template to<std::tuple_element_t<index, std::tuple<Implementations...>>>());
+	}
+
 	///--------------------------------------------------------------------------------
 	/// @brief DynamicModule
 	///--------------------------------------------------------------------------------
 
-	template<
-		is_dynamic_interface Interface,
-		is_dynamic_implementation<Interface>... Implementations>
-	class DynamicModule final : public ModuleBase<Interface, Implementations...>
-	{
+	//template<
+	//	is_dynamic_interface Interface,
+	//	is_dynamic_implementation<Interface>... Implementations>
+	//class DynamicModule final : public ModuleBase<Interface, Implementations...>
+	//{
 
-		template<is_dynamic_interface Base, is_dynamic_implementation<Base>... Derived>
-		friend constexpr auto CreateModule(const ModuleParameters& parameters);
+	//	template<is_dynamic_interface Base, is_dynamic_implementation<Base>... Derived>
+	//	friend constexpr auto CreateModule(const ModuleParameters& parameters);
 
-		explicit constexpr DynamicModule(const ModuleParameters& parameters);
-	};
+	//	explicit constexpr DynamicModule(const ModuleParameters& parameters);
+	//};
 
-	template<
-		is_dynamic_interface Interface,
-		is_dynamic_implementation<Interface>... Implementations>
-	constexpr DynamicModule<Interface, Implementations...>::DynamicModule(
-		const ModuleParameters& parameters) :
-		ModuleBase<Interface, Implementations...>(parameters)
-	{
-	}
+	//template<
+	//	is_dynamic_interface Interface,
+	//	is_dynamic_implementation<Interface>... Implementations>
+	//constexpr DynamicModule<Interface, Implementations...>::DynamicModule(
+	//	const ModuleParameters& parameters) :
+	//	ModuleBase<Interface, Implementations...>(parameters)
+	//{
+	//}
 
 
 	template<class T>
 	concept is_static_module = std::derived_from<T, StaticModule<T>>;
 
-	template<class T>
-	concept is_dynamic_module = std::derived_from<T, DynamicModule<T>>;
+	//template<class T>
+	//concept is_dynamic_module = std::derived_from<T, DynamicModule<T>>;
 
 	template<class T>
-	concept is_module = is_static_module<T> || is_dynamic_module<T>;
+	concept is_module = is_static_module<T> /*|| is_dynamic_module<T>*/;
 
 
 	///--------------------------------------------------------------------------------
@@ -245,13 +245,13 @@ namespace synodic
 
 	// Creates a dynamic module which is evaluated at compile time.
 	// TODO: Remove Implementations template
-	template<
-		is_dynamic_interface Interface,
-		is_dynamic_implementation<Interface>... Implementations>
-	constexpr auto CreateModule(const ModuleParameters& parameters)
-	{
-		// TODO: Pass along all types deriving from Interface c++23, reflection
-		return DynamicModule<Interface, Implementations...>(parameters);
-	}
+	//template<
+	//	is_dynamic_interface Interface,
+	//	is_dynamic_implementation<Interface>... Implementations>
+	//constexpr auto CreateModule(const ModuleParameters& parameters)
+	//{
+	//	// TODO: Pass along all types deriving from Interface c++23, reflection
+	//	return DynamicModule<Interface, Implementations...>(parameters);
+	//}
 
 }

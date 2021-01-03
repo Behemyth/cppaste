@@ -25,7 +25,7 @@ set_target_properties(tests
 )
 
 
-find_package(doctest 2.4.1 REQUIRED)
+find_package(doctest 2.4.4 REQUIRED)
 
 target_link_libraries(tests
 PUBLIC
