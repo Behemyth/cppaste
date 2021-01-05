@@ -8,8 +8,8 @@ namespace synodic
 	///--------------------------------------------------------------------------------
 	/// @brief Manages multiple modules
 	///--------------------------------------------------------------------------------
-	
-	template<typename... Modules>
+
+	template<std::derived_from<ModuleBase>... Modules>
 	class Package
 	{
 
@@ -18,48 +18,49 @@ namespace synodic
 
 		template<typename T>
 		[[nodiscard]] constexpr auto Create() const;
+
 		template<template<typename...> typename T>
 		[[nodiscard]] constexpr auto Create() const;
 
 	private:
 		[[nodiscard]] constexpr auto Inject() const;
-		
+
 		std::tuple<const Modules&...> modules_;
 	};
 
-	
+
 	// TODO: Constrain Module type
-	template<typename... Modules>
-	constexpr Package<Modules...>::Package(const Modules&... modules) :
-		modules_(modules...)
+	template<std::derived_from<ModuleBase>... Modules>
+	constexpr Package<Modules...>::Package(const Modules&... modules) : modules_(modules...)
 	{
 	}
 
 	// Create injector from all module types
-	template<typename... Modules>
+	template<std::derived_from<ModuleBase>... Modules>
 	constexpr auto Package<Modules...>::Inject() const
 	{
-		return false; /*std::apply(
+		 return std::apply(
 			[](auto&... synodicModule) {
-				return boost::di::make_injector(synodicModule.Inject()...);
+				// TODO: Fix Injector type, possibly with factory?
+				return Injector<bool>(synodicModule.Inject()...);
 			},
-			modules_);*/
+			modules_);
 	}
-	
+
 	// Create type
-	template<typename... Modules>
+	template<std::derived_from<ModuleBase>... Modules>
 	template<typename T>
 	constexpr auto Package<Modules...>::Create() const
 	{
-		return Inject().template create<T>();
+		 return Inject().template Create<T>();
 	}
 
 	// Create templated type
-	template<typename... Modules>
+	template<std::derived_from<ModuleBase>... Modules>
 	template<template<typename...> typename T>
 	constexpr auto Package<Modules...>::Create() const
 	{
-		return Inject().template create<T>();
+		 return Inject().template Create<T>();
 	}
 
 }

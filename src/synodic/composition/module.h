@@ -5,6 +5,7 @@
 #include <numeric>
 #include <tuple>
 
+#include "injection/injector.h"
 
 namespace synodic
 {
@@ -99,7 +100,6 @@ namespace synodic
 	/// @brief ModuleBase
 	///--------------------------------------------------------------------------------
 
-	template<typename Interface, typename... Implementations>
 	class ModuleBase
 	{
 
@@ -108,35 +108,30 @@ namespace synodic
 		explicit constexpr ModuleBase(const ModuleParameters& parameters);
 	};
 
-	template<typename Interface, typename... Implementations>
-	constexpr ModuleBase<Interface, Implementations...>::ModuleBase(
-		const ModuleParameters& parameters)
-	{
-	}
-
 	///--------------------------------------------------------------------------------
 	/// @brief StaticModule
 	///--------------------------------------------------------------------------------
 
 	template<is_static_interface Interface, is_static_implementation<Interface>... Implementations>
-	class StaticModule final : public ModuleBase<Interface, Implementations...>
+	class StaticModule final : public ModuleBase
 	{
 
 		template<is_static_interface Base, is_static_implementation<Base>... Derived>
 		friend constexpr auto CreateModule(const ModuleParameters& parameters);
 
-	public:
-
-		constexpr auto Inject() const;
+		template<std::derived_from<ModuleBase>... Modules>
+		friend class Package;
 
 	private:
+		constexpr auto Inject() const;
+
 		explicit constexpr StaticModule(const ModuleParameters& parameters);
 	};
 
 	template<is_static_interface Interface, is_static_implementation<Interface>... Implementations>
 	constexpr StaticModule<Interface, Implementations...>::StaticModule(
 		const ModuleParameters& parameters) :
-		ModuleBase<Interface, Implementations...>(parameters)
+		ModuleBase(parameters)
 	{
 	}
 
@@ -168,7 +163,8 @@ namespace synodic
 			});
 
 		// Bind a single type to the interface.
-		return false;
+		return true;
+
 		/*boost::di::make_injector(
 			boost::di::bind<Interface>()
 				.template to<std::tuple_element_t<index, std::tuple<Implementations...>>>());*/
@@ -181,12 +177,15 @@ namespace synodic
 	template<
 		is_dynamic_interface Interface,
 		is_dynamic_implementation<Interface>... Implementations>
-	class DynamicModule final : public ModuleBase<Interface, Implementations...>
+	class DynamicModule final : public ModuleBase
 	{
 
 		template<is_dynamic_interface Base, is_dynamic_implementation<Base>... Derived>
 		friend constexpr auto CreateModule(const ModuleParameters& parameters);
 
+		template<std::derived_from<ModuleBase>... Modules>
+		friend class Package;
+		
 		explicit constexpr DynamicModule(const ModuleParameters& parameters);
 	};
 
@@ -195,20 +194,9 @@ namespace synodic
 		is_dynamic_implementation<Interface>... Implementations>
 	constexpr DynamicModule<Interface, Implementations...>::DynamicModule(
 		const ModuleParameters& parameters) :
-		ModuleBase<Interface, Implementations...>(parameters)
+		ModuleBase(parameters)
 	{
 	}
-
-
-	template<class T>
-	concept is_static_module = std::derived_from<T, StaticModule<T>>;
-
-	template<class T>
-	concept is_dynamic_module = std::derived_from<T, DynamicModule<T>>;
-
-	template<class T>
-	concept is_module = is_static_module<T> || is_dynamic_module<T>;
-
 
 	///--------------------------------------------------------------------------------
 	/// @brief Interface factory functions
