@@ -1,8 +1,39 @@
 = Composition Design
 
+== Functional
+
+=== Features
+
+Events
+
+Delegates
+
+Signals
+
+== Injection
+
+=== Features
+
+- Multiple Interfaces
+Allows shared initialization
+
+- Lifetime
+Singleton, unique
+
+- Providers
+
+Allocation
+
+- Concepts
+Force the types of a constructor to fit the provided concept
+
+
 == Modules
 
 Modules are a component based framework that provide composable behaviors and type injection with polymorphic properties.
+
+=== Features
+
 
 === Comparison of Polymorphic Types
 

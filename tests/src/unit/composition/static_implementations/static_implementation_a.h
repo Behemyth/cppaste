@@ -7,7 +7,7 @@
 
 
 class StaticImplementationA final :
-	public synodic::StaticImplementation<StaticInterfaceA, StaticImplementationA>
+	public cppaste::StaticImplementation<StaticInterfaceA, StaticImplementationA>
 {
 public:
 	constexpr StaticImplementationA() = default;

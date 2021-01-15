@@ -7,7 +7,7 @@
 
 #include "injection/injector.h"
 
-namespace synodic
+namespace cppaste
 {
 
 	// TODO: Move this into a relevant module
@@ -163,11 +163,14 @@ namespace synodic
 			});
 
 		// Bind a single type to the interface.
+
+		//Dependency<Interface, std::tuple_element_t<index, std::tuple<Implementations...>>>()> dependency();
+		
 		return true;
 
 		/*boost::di::make_injector(
 			boost::di::bind<Interface>()
-				.template to<std::tuple_element_t<index, std::tuple<Implementations...>>>());*/
+				.template to<);*/
 	}
 
 	///--------------------------------------------------------------------------------

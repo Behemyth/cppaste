@@ -1,6 +1,6 @@
 #include "module.h"
 
-namespace synodic
+namespace cppaste
 {
 	constexpr ModuleBase::ModuleBase(const ModuleParameters& parameters)
 	{

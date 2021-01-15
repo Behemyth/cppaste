@@ -3,7 +3,7 @@
 #include <filesystem>
 
 
-namespace synodic
+namespace cppaste
 {
 
 	///--------------------------------------------------------------------------------

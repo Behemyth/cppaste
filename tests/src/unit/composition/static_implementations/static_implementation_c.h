@@ -6,7 +6,7 @@
 #include "synodic/composition/module.h"
 
 class StaticImplementationC final :
-	public synodic::StaticImplementation<StaticInterfaceA, StaticImplementationC>
+	public cppaste::StaticImplementation<StaticInterfaceA, StaticImplementationC>
 {
 public:
 	constexpr StaticImplementationC() = default;

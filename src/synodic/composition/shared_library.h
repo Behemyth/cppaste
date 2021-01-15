@@ -5,7 +5,7 @@
 #include "module.h"
 
 
-namespace synodic
+namespace cppaste
 {
 
 	template<typename T>

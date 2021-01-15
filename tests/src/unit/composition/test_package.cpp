@@ -8,10 +8,10 @@
 //{
 //	TEST_CASE("Single Modules")
 //	{
-//		const synodic::ModuleParameters params;
-//		const auto synodicModule = synodic::CreateModule<DynamicInterfaceA, DynamicImplementationA>(params);
+//		const cppaste::ModuleParameters params;
+//		const auto synodicModule = cppaste::CreateModule<DynamicInterfaceA, DynamicImplementationA>(params);
 //
-//		const auto package = synodic::Package(synodicModule);
+//		const auto package = cppaste::Package(synodicModule);
 //		const auto app	   = package.Create<UniquePtrApp>();
 //
 //		CHECK(app.Get() == 3);

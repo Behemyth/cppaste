@@ -5,7 +5,7 @@
 #include "../dynamic_interface_types.h"
 #include "synodic/composition/module.h"
 
-//class DynamicImplementationB final : public synodic::DynamicImplementation<DynamicInterfaceA, DynamicImplementationB>
+//class DynamicImplementationB final : public cppaste::DynamicImplementation<DynamicInterfaceA, DynamicImplementationB>
 //{
 //public:
 //	constexpr DynamicImplementationB() = default;

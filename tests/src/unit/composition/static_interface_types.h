@@ -13,7 +13,7 @@ concept interface_a_concept = requires(T object)
 	->std::same_as<int>;
 };
 
-class StaticInterfaceA : public synodic::StaticInterface<StaticInterfaceA>
+class StaticInterfaceA : public cppaste::StaticInterface<StaticInterfaceA>
 {
 public:
 	constexpr StaticInterfaceA() = default;
@@ -34,7 +34,7 @@ concept interface_b_concept = requires(T object)
 	->std::same_as<int>;
 };
 
-class StaticInterfaceB : public synodic::StaticInterface<StaticInterfaceB>
+class StaticInterfaceB : public cppaste::StaticInterface<StaticInterfaceB>
 {
 public:
 	constexpr StaticInterfaceB() = default;

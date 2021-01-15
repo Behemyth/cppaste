@@ -11,8 +11,8 @@
 //
 //	TEST_CASE("Single Implementation")
 //	{
-//		const synodic::ModuleParameters params;
-//		const auto synodicModule = synodic::CreateModule<DynamicInterfaceA, DynamicImplementationA>(params);
+//		const cppaste::ModuleParameters params;
+//		const auto synodicModule = cppaste::CreateModule<DynamicInterfaceA, DynamicImplementationA>(params);
 //
 //		SUBCASE("reference")
 //		{
@@ -24,9 +24,9 @@
 //
 //	TEST_CASE("Multiple Implementations")
 //	{
-//		const synodic::ModuleParameters params;
+//		const cppaste::ModuleParameters params;
 //		const auto synodicModule =
-//			synodic::CreateModule<DynamicInterfaceA, DynamicImplementationA, DynamicImplementationB>(params);
+//			cppaste::CreateModule<DynamicInterfaceA, DynamicImplementationA, DynamicImplementationB>(params);
 //
 //		SUBCASE("Reference")
 //		{

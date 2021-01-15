@@ -1,33 +1,32 @@
 #pragma once
 
-namespace synodic
+#include <concepts>
+
+namespace cppaste
 {
 
-	template<typename T>
-	concept is_dependency = true;
-
-	class DependencyBase
+	class DependencyType
 	{
 	};
 
-	template<typename Interface, typename Implementation>
-	class Dependency : DependencyBase
+	template<class Scope, typename Interface, std::derived_from<Interface> Implementation>
+	class Dependency : DependencyType, public Scope::template scope<Interface, Implementation>
 	{
 
 	public:
 		Dependency() noexcept = default;
 
 
-		template<is_dependency T>
+		template<std::derived_from<Interface> T>
 		auto Bind() const noexcept;
 	};
 
 
-	template<typename Interface, typename Implementation>
-	template<is_dependency T>
-	auto Dependency<Interface, Implementation>::Bind() const noexcept
-	{
-		return Dependency<Interface, T>();
-	}
+	//template<typename Interface, std::derived_from<Interface> Implementation>
+	//template<std::derived_from<Interface> T>
+	//auto Dependency<Interface, Implementation>::Bind() const noexcept
+	//{
+	//	return Dependency<Interface, T>();
+	//}
 
 }

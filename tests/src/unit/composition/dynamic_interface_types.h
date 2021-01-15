@@ -4,7 +4,7 @@
 
 #include "synodic/composition/module.h"
 
-//class DynamicInterfaceA : public synodic::DynamicInterface<DynamicInterfaceA>
+//class DynamicInterfaceA : public cppaste::DynamicInterface<DynamicInterfaceA>
 //{
 //public:
 //	constexpr DynamicInterfaceA() = default;

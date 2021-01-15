@@ -2,7 +2,7 @@
 
 #include "module.h"
 
-namespace synodic
+namespace cppaste
 {
 
 	///--------------------------------------------------------------------------------

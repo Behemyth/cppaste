@@ -1,6 +1,6 @@
 #pragma once
 
-namespace synodic
+namespace cppaste
 {
 	class Configuration
 	{
