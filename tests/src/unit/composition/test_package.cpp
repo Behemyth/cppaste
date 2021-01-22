@@ -1,8 +1,6 @@
 #include "doctest/doctest.h"
 #include "synodic/composition/package.h"
 
-#include "dynamic_application_types.h"
-
 
 //TEST_SUITE("Polymorphic Injection")
 //{

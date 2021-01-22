@@ -18,9 +18,11 @@ Signals
 Allows shared initialization
 
 - Lifetime
-Singleton, unique
+Singleton, unique, instance
 
 - Providers
+
+Allocation
 
 Allocation
 

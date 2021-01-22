@@ -1,8 +1,6 @@
 #include "synodic/composition/module.h"
 #include "doctest/doctest.h"
 
-#include "dynamic_application_types.h"
-
 //#include "dynamic_implementations/dynamic_implementation_a.h"
 //#include "dynamic_implementations/dynamic_implementation_b.h"
 //

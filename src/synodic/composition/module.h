@@ -5,32 +5,10 @@
 #include <numeric>
 #include <tuple>
 
-#include "injection/injector.h"
+#include "synodic/injection/injector.h"
 
 namespace cppaste
 {
-
-	// TODO: Move this into a relevant module
-
-	///--------------------------------------------------------------------------------
-	/// @brief A helper struct that provides function to cast the this* to the given type
-	///		statically. Meant to be privately inherited
-	///--------------------------------------------------------------------------------
-
-	template<typename T>
-	struct CRTP
-	{
-		T& DerivedType()
-		{
-			return static_cast<T&>(*this);
-		}
-		T const& DerivedType() const
-		{
-			return static_cast<T const&>(*this);
-		}
-	};
-
-
 	///--------------------------------------------------------------------------------
 	/// @brief ModuleBase Configuration for Interface types
 	///--------------------------------------------------------------------------------
