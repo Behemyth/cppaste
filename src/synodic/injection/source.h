@@ -9,4 +9,10 @@ namespace cppaste
 
 	};
 
+	// TODO: Library defined sources
+
+	// TODO: Stack source
+
+	// TODO: Heap source with allocator
+
 }
