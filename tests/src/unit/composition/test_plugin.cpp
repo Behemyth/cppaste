@@ -2,11 +2,7 @@
 #include "synodic/composition/plugin.h"
 
 
-TEST_SUITE("Polymorphic Injection")
+TEST_SUITE("Plugin")
 {
-	TEST_CASE("Single Modules")
-	{
-		CHECK(true);
-	}
 	
 }

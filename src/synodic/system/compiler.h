@@ -9,7 +9,7 @@ enum class CompilerID
 	UNKNOWN
 };
 
-#define SYNODIC_COMPILER(X)					  SYNODIC_COMPILER_PRIVATE_##X()
+#define SYNODIC_COMPILER(X) SYNODIC_COMPILER_PRIVATE_##X()
 
 class Compiler
 {

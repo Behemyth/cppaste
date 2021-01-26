@@ -5,12 +5,9 @@
 namespace cppaste
 {
 
-	class DependencyType
-	{
-	};
-
+	// Creates a link between two related types
 	template<class Scope, typename Interface, std::derived_from<Interface> Implementation>
-	class Dependency : DependencyType, public Scope::template scope<Interface, Implementation>
+	class Dependency : public Scope::template scope<Interface, Implementation>
 	{
 
 	public:
@@ -22,11 +19,11 @@ namespace cppaste
 	};
 
 
-	//template<typename Interface, std::derived_from<Interface> Implementation>
-	//template<std::derived_from<Interface> T>
-	//auto Dependency<Interface, Implementation>::Bind() const noexcept
-	//{
-	//	return Dependency<Interface, T>();
-	//}
+	template<class Scope, typename Interface, std::derived_from<Interface> Implementation>
+	template<std::derived_from<Interface> T>
+	auto Dependency<Scope, Interface, Implementation>::Bind() const noexcept
+	{
+		return Dependency<Scope, Interface, T>();
+	}
 
 }

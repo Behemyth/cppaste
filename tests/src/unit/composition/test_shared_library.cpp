@@ -4,9 +4,5 @@
 
 TEST_SUITE("Shared Library")
 {
-	TEST_CASE("Yes")
-	{
-		CHECK(true);
-	}
 	
 }

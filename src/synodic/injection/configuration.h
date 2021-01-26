@@ -2,19 +2,17 @@
 
 namespace cppaste
 {
+
+	// Configuration that bundles user-defined arguments which drive the injection process
 	class Configuration
 	{
-		//template<class T>
-		//auto provider(T*) noexcept
-		//{
-		//	return providers::stack_over_heap {};
-		//}
 
-		//template<class T>
-		//auto policies(T*) noexcept
-		//{
-		//	return make_policies();
-		//}
+		// TODO: Implement configuration of sources
+
+		// TODO: Implement configuration of concepts
+		
 	};
+
+	// TODO: Provide pre-defined configuration types
 
 }

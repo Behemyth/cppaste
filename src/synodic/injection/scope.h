@@ -12,6 +12,7 @@ namespace cppaste
 	};
 
 
+	// Scopes define the behavior of the same type between dependencies
 	template<ScopeType>
 	class Scope;
 
