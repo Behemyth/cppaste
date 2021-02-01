@@ -16,11 +16,11 @@ class TestClass
 {
 public:
 	TestClass(std::vector<int> parameter1, TestData parameter2, int parameter3) :
-		data1_(parameter1), data2_(parameter2), data3_(parameter3) {
+		data1_(std::move(parameter1)), data2_(parameter2), data3_(parameter3)
+	{
+	}
 
-												};
-
-	int GetData3() const
+	[[nodiscard]] int GetData3() const
 	{
 		return data3_;
 	}
@@ -39,9 +39,9 @@ public:
 		const TestData parameter2,
 		const int parameter3) :
 		data1_(parameter1),
-		data2_(parameter2), data3_(parameter3) {
-
-							};
+		data2_(parameter2), data3_(parameter3)
+	{
+	}
 
 private:
 	const std::vector<int> data1_;
@@ -53,9 +53,9 @@ class ReferenceTestClass
 {
 public:
 	ReferenceTestClass(std::vector<int>& parameter1, TestData& parameter2, int& parameter3) :
-		data1_(parameter1), data2_(parameter2), data3_(parameter3) {
-
-												};
+		data1_(parameter1), data2_(parameter2), data3_(parameter3)
+	{
+	}
 
 private:
 	std::vector<int>& data1_;
@@ -67,9 +67,9 @@ class PointerTestClass
 {
 public:
 	PointerTestClass(std::vector<int>* parameter1, TestData* parameter2, int* parameter3) :
-		data1_(parameter1), data2_(parameter2), data3_(parameter3) {
-
-												};
+		data1_(parameter1), data2_(parameter2), data3_(parameter3)
+	{
+	}
 
 private:
 	std::vector<int>* data1_;
