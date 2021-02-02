@@ -28,6 +28,8 @@ PROPERTIES
 	CXX_EXTENSIONS NO
 )
 
+find_package(synodic-template-library 0.1.0 REQUIRED)
+
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/*)
 
 target_include_directories(${PROJECT_NAME}
@@ -41,7 +43,8 @@ PRIVATE
 )
 
 target_link_libraries(${PROJECT_NAME}
-PUBLIC
+PRIVATE
+	synodic-template-library::synodic-template-library
 )
 
 #Provides Visual Studio filter support
