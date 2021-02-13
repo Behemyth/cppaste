@@ -15,8 +15,8 @@ class Compiler
 {
 
 public:
-	constexpr static CompilerID GetCompiler();
-	constexpr static bool Debug();
+	constexpr static auto GetCompiler() -> CompilerID;
+	constexpr static auto Debug()		-> bool;
 
 
 private:

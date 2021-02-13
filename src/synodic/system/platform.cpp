@@ -1,6 +1,6 @@
 #include "platform.h"
 
-constexpr PlatformID Platform::GetPlatform()
+constexpr auto Platform::GetPlatform() -> PlatformID
 {
 	return platform_;
 }

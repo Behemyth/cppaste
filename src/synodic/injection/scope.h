@@ -21,11 +21,11 @@ namespace cppaste
 	{
 	public:
 		template<typename T>
-		std::unique_ptr<T> Create();
+		auto Create() -> std::unique_ptr<T>;
 	};
 
 	template<typename T>
-	std::unique_ptr<T> Scope<ScopeType::UNIQUE>::Create()
+	auto Scope<ScopeType::UNIQUE>::Create() -> std::unique_ptr<T>
 	{
 		return std::make_unique<T>();
 	}
@@ -39,7 +39,7 @@ namespace cppaste
 	};
 
 	template<typename T>
-	std::shared_ptr<T> Scope<ScopeType::SHARED>::Create()
+	auto Scope<ScopeType::SHARED>::Create() -> std::shared_ptr<T>
 	{
 		return std::make_shared<T>();
 	}

@@ -1,74 +1,88 @@
 #pragma once
 
-#include <type_traits>
-
+#include "configuration.h"
 #include "dependency.h"
+#include "solver.h"
+#include "type.h"
 
 namespace cppaste
 {
 
-	// The injector hold the type information to be used for injection and also provides creation utilities
-	
-	template<typename T, typename... Args>
-	concept is_createable = std::is_constructible_v<T, Args...>();
+	// The injector hold the type information to be used for injection and also provides creation
+	// utilities
 
-	template<typename Configuration, typename... Dependencies>
+	// TODO: Create the concept
+	template<typename T, typename... Args>
+	concept is_createable = true;
+
+
+	template<is_configuration Configuration = StackConfiguration, typename... Dependencies>
 	class Injector
 	{
 
 	public:
-		template<typename... SubDependencies, typename... Args>
-		Injector(Injector<SubDependencies...>&& injector, Args... arguments);
+		// Constructor handling an Injector type
+		template<typename... InjectorDependencies, typename... Args>
+		explicit constexpr Injector(
+			Injector<InjectorDependencies...>&& injector,
+			Args&&... arguments);
 
-		//template<typename Interface, typename Implementation, typename... Args>
-		//Injector(Dependency<Interface, Implementation>&& injector, Args... arguments);
+		// Constructor handling a Type type
+		template<typename DependencyType, ScopeType Scope, typename... Args>
+		explicit constexpr Injector(Type<DependencyType, Scope>&& type, Args&&... arguments);
 
-
+		// Creates a type T from the available type information given to the constructor
 		template<is_createable T>
-		T Create() const;
+		constexpr auto Create() const -> T;
 
-		template<template<typename...> typename T, is_createable R = bool>
-		R Create() const;
+		// An overload of the `Create` function that works for templated types. If applicable, the
+		//		second template parameter R will be resolved to a concrete type that fulfills the
+		//		template T
+		template<template<typename...> typename T, is_createable R = bool>	// TODO: Resolve type
+		constexpr auto Create() const -> R;
 
 	private:
+		using DependencyTuple = std::tuple<Dependencies...>;
 	};
 
 
-	template<typename Configuration, typename... Dependencies>
-	template<typename... SubDependencies, typename... Args>
-	Injector<Configuration, Dependencies...>::Injector(Injector<SubDependencies...>&& injector, Args... arguments)
+	template<is_configuration Configuration, typename... Dependencies>
+	template<typename... InjectorDependencies, typename... Args>
+	constexpr Injector<Configuration, Dependencies...>::Injector(
+		Injector<InjectorDependencies...>&& injector,
+		Args&&... arguments)
 	{
-		Injector(arguments...);
+		auto subInjector = Injector(arguments...);
 	}
 
-	//template<typename Configuration, typename... Dependencies>
-	//template<typename Interface, typename Implementation, typename... Args>
-	//Injector<Configuration, Dependencies...>::Injector(
-	//	Dependency<Interface, Implementation>&& injector,
-	//	Args... arguments)
-	//{
-	//	Injector(arguments...);
-	//}
-
-	template<typename Configuration, typename... Dependencies>
-	template<is_createable T>
-	T Injector<Configuration, Dependencies...>::Create() const
+	template<is_configuration Configuration, typename... Dependencies>
+	template<typename DependencyType, ScopeType Scope, typename... Args>
+	constexpr Injector<Configuration, Dependencies...>::Injector(
+		Type<DependencyType, Scope>&& type,
+		Args&&... arguments)
 	{
+		auto subInjector =  Injector(arguments...);
+	}
+
+	template<is_configuration Configuration, typename... Dependencies>
+	template<is_createable T>
+	constexpr auto Injector<Configuration, Dependencies...>::Create() const -> T
+	{
+		Solver<T> solver;
 		return T();
 	}
 
-	template<typename Configuration, typename... Dependencies>
+	template<is_configuration Configuration, typename... Dependencies>
 	template<template<typename...> typename T, is_createable R>	 // TODO: Resolve type
-	R Injector<Configuration, Dependencies...>::Create() const
+	constexpr auto Injector<Configuration, Dependencies...>::Create() const -> R
 	{
-		// Top level type construction routine
-		// R contains the isolated type to start traversing
 		return R();
 	}
 
 	// Export injector types
 
-	using StaticInjector = int;
+	// TODO: Export the actual types instead of placeholders
+	using StaticInjector  = int;
 	using DynamicInjector = int;
-	
+
 }

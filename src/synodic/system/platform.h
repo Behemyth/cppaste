@@ -15,7 +15,7 @@ class Platform
 {
 
 public:
-	constexpr static PlatformID GetPlatform();
+	constexpr static auto GetPlatform() -> PlatformID;
 
 private:
 #if defined(_WIN64)

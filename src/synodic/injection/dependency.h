@@ -2,28 +2,20 @@
 
 #include <concepts>
 
+#include "scope.h"
+
+class Interface;
+
 namespace cppaste
 {
 
-	// Creates a link between two related types
-	template<class Scope, typename Interface, std::derived_from<Interface> Implementation>
+	// A wrapper around types that provide injection metadata
+	template<typename Expected, typename Given, ScopeType Scope>
 	class Dependency
 	{
 
 	public:
-		Dependency() noexcept = default;
-
-
-		template<std::derived_from<Interface> T>
-		auto Bind() const noexcept;
+		consteval Dependency() noexcept = default;
 	};
-
-
-	template<class Scope, typename Interface, std::derived_from<Interface> Implementation>
-	template<std::derived_from<Interface> T>
-	auto Dependency<Scope, Interface, Implementation>::Bind() const noexcept
-	{
-		return Dependency<Scope, Interface, T>();
-	}
 
 }

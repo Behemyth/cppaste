@@ -1,11 +1,11 @@
 #include "compiler.h"
 
-constexpr CompilerID Compiler::GetCompiler()
+constexpr auto Compiler::GetCompiler() -> CompilerID
 {
 	return compiler_;
 }
 
-constexpr bool Compiler::Debug()
+constexpr auto Compiler::Debug() -> bool
 {
 	return debug_;
 }
