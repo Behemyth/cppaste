@@ -1,12 +1,38 @@
 = CPPaste
-Scalable, sharable program framework.
+Non-intrusive, sharable program framework for C++23 and beyond.
+:toc:
 
 == Features
 
-=== Modules
-A concept oriented object that manages dependencies, plugins, compilation for interchangeable interfaces. These are unrelated to C++ modules.
+=== Modules - Static and Dynamic Polymorphism
 
-They handle 
+[cols="1,1,1"]
+|===
+||*Static* |*Dynamic*
+|*Single Behavior*
+|C++20 Concepts
+|std::function or std::function_ref
 
-=== System
-System information distilled into `constexpr` utility
+|*Bundled Behavior*
+|C++20 Concepts
+|Abstract Base Class
+|===
+
+Allows shared downstream behavior for any case of polymorphism
+
+There is a Directed Acyclic Graph representing all modules, both dynamic and static.
+Static modules are allowed to depend on dynamic modules. However, the dynamic modules state will be unresolved.
+Only when built will dynamic modules be resolvable.
+
+==== Agnostic Build System Integration
+TODO
+
+=== Dependency Injection
+TODO
+
+
+=== Bindings - Script and Language Interoperability
+C
+
+=== System Information - Distilled `constexpr` Utilities
+System information and build macros distilled into `constexpr` utilities
