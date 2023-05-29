@@ -1,18 +1,23 @@
 [tool.poetry]
 name = "cppaste"
-version = "0.1.0"
 description = ""
 
 license = "MIT"
 
 authors = [
-    "Synodic Software"
+  {name = "Synodic Software", email = "contact@synodic.software"},
 ]
 
 readme = "README.adoc"
 
-repository = "https://github.com/Synodic-Software/CPPaste"
+dynamic = ["version"]
+
+[project.license-files]
+paths = ["LICENSE.md"]
+
+[project.urls]
 homepage = "https://github.com/Synodic-Software/CPPaste"
+repository = "https://github.com/Synodic-Software/CPPaste"
 
 
 [tool.poetry.dependencies]
@@ -21,5 +26,5 @@ conan = "^2.0"
 
 
 [build-system]
-requires      = ["poetry>=1.1"]
-build-backend = "poetry.core.masonry.api"
+build-backend = "pdm.pep517.api"
+requires = ["pdm-pep517"]
