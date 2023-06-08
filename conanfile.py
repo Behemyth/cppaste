@@ -1,36 +1,50 @@
-from conans import ConanFile, CMake
+"""Conan file"""
 
-class SynodicCoreConan(ConanFile):
-	name = "cppaste"
-	version = "0.1.0"
-	license = "MIT"
-	homepage = "https://github.com/Synodic-Software/CPPaste"
-	settings = "os", "compiler", "build_type", "arch"
-	requires = "doctest/2.4.4", "synodic-template-library/0.1.0"
-	generators = "cmake_find_package"
-	scm = {
-         "type": "git",
-         "url": "auto",
-         "revision": "auto",
-    }
+from conan import ConanFile
+from conan.tools.cmake import CMake, CMakeToolchain, cmake_layout
 
-	def build(self):
-		cmake = CMake(self)
-		cmake.configure()
-		cmake.build()
 
-	def package(self):
-		self.copy("*.h", src="src", dst="include")
-		self.copy("*.lib", dst="lib", keep_path=False)
-		self.copy("*.dll", dst="bin", keep_path=False)
-		self.copy("*.so", dst="lib", keep_path=False)
-		self.copy("*.dylib", dst="lib", keep_path=False)
-		self.copy("*.a", dst="lib", keep_path=False)
+class CPPasteRecipe(ConanFile):
+    """Recipe for CPPaste"""
 
-	def package_info(self):
-		self.cpp_info.libs = ["cppaste"]
+    name = "cppaste"
+    version = "1.0"
 
-		# If the the package is in editable mode, forward the library path
-		if not self.in_local_cache:
-			self.cpp_info.includedirs = ["src"]
-			self.cpp_info.libdirs = ["build"]
+    # Optional metadata
+    license = "<Put the package license here>"
+    author = "<Put your name here> <And your email here>"
+    url = "<Package recipe repository url here, for issues about the package>"
+    description = "<Description of hello package here>"
+    topics = ("<Put some tag here>", "<here>", "<and here>")
+
+    # Binary configuration
+    settings = "os", "compiler", "build_type", "arch"
+    options = {"shared": [True, False], "fPIC": [True, False]}
+    default_options = {"shared": False, "fPIC": True}
+
+    generators = "CMakeDeps"
+
+    # Sources are located in the same place as this recipe, copy them to the recipe
+    exports_sources = "CMakeLists.txt", "src/*", "include/*"
+
+    def config_options(self):
+        if self.settings.os == "Windows":
+            del self.options.fPIC
+
+    def requirements(self):
+        self.requires("gtest/1.13.0")
+
+    def layout(self):
+        cmake_layout(self)
+
+    def build(self):
+        cmake = CMake(self)
+        cmake.configure()
+        cmake.build()
+
+    def package(self):
+        cmake = CMake(self)
+        cmake.install()
+
+    def package_info(self):
+        self.cpp_info.libs = ["cppaste"]
