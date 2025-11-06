@@ -1,41 +1,24 @@
-"""Conan file"""
-
 from conan import ConanFile
-from conan.tools.cmake import CMake, CMakeToolchain, cmake_layout
+from conan.tools.cmake import CMake, CMakeDeps, CMakeToolchain, cmake_layout
+from conan.tools.files import copy
 
 
-class CPPasteRecipe(ConanFile):
-    """Recipe for CPPaste"""
-
-    name = "cppaste"
-    version = "1.0"
-
-    # Optional metadata
-    license = "<Put the package license here>"
-    author = "<Put your name here> <And your email here>"
-    url = "<Package recipe repository url here, for issues about the package>"
-    description = "<Description of hello package here>"
-    topics = ("<Put some tag here>", "<here>", "<and here>")
-
-    # Binary configuration
-    settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [True, False], "fPIC": [True, False]}
-    default_options = {"shared": False, "fPIC": True}
-
-    generators = "CMakeDeps"
-
-    # Sources are located in the same place as this recipe, copy them to the recipe
-    exports_sources = "CMakeLists.txt", "src/*", "include/*"
-
-    def config_options(self):
-        if self.settings.os == "Windows":
-            del self.options.fPIC
-
-    def requirements(self):
-        self.requires("gtest/1.13.0")
+class MyProject(ConanFile):
+    name = 'cppaste'
+    version = '1.0'
+    settings = 'os', 'compiler', 'build_type', 'arch'
+    requires = ["honesty/[>=0.0.0.dev1]", "synodic-template-library/[>=0.0.0.dev1]"]
 
     def layout(self):
         cmake_layout(self)
+
+    def generate(self):
+        deps = CMakeDeps(self)
+        deps.generate()
+        tc = CMakeToolchain(self)
+        tc.user_presets_path = None
+        tc.variables['BUILD_TESTING'] = 'OFF'
+        tc.generate()
 
     def build(self):
         cmake = CMake(self)
@@ -47,4 +30,15 @@ class CPPasteRecipe(ConanFile):
         cmake.install()
 
     def package_info(self):
-        self.cpp_info.libs = ["cppaste"]
+        self.cpp_info.set_property('cmake_find_mode', 'none')
+        self.cpp_info.builddirs = ['.']
+
+    def export_sources(self):
+        copy(self, 'CMakeLists.txt', src=self.recipe_folder, dst=self.export_sources_folder)
+        copy(self, 'src/*', src=self.recipe_folder, dst=self.export_sources_folder)
+        copy(
+            self,
+            'tool/cmake/cppasteConfig.cmake.in',
+            src=self.recipe_folder,
+            dst=self.export_sources_folder,
+        )
