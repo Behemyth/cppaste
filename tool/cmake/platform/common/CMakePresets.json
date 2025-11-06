@@ -14,7 +14,8 @@
                 "CMAKE_CONFIGURATION_TYPES": {
                     "type": "STRING",
                     "value": "Debug;Development;Release"
-                }
+                },
+                "BUILD_TESTING": "ON"
             }
         },
         {

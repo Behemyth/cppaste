@@ -4,7 +4,9 @@ Non-intrusive, sharable program framework for C++23 and beyond.
 
 == Features
 
-=== Modules - Static and Dynamic Polymorphism
+=== Services - Static and Dynamic Polymorphism
+
+Note: The name "Service" is used to avoid confusion with C++20 modules.
 
 [cols="1,1,1"]
 |===
@@ -20,16 +22,16 @@ Non-intrusive, sharable program framework for C++23 and beyond.
 
 Allows shared downstream behavior for any case of polymorphism
 
-There is a Directed Acyclic Graph(DAG) representing all modules, both dynamic and static.
-Static modules are allowed to depend on dynamic modules. However, the dynamic modules state will be unresolved at compile time. To rectify this, each static module creates a dynamic module which is constructed when all dynamic dependencies are resolved.
+There is a Directed Acyclic Graph(DAG) representing all services, both dynamic and static.
+Static services are allowed to depend on dynamic services. However, the dynamic services state will be unresolved at compile time. To rectify this, each static service creates a dynamic service which is constructed when all dynamic dependencies are resolved.
 
-By nature of an object existing, the state of the dependencies will also exist. Ownership transfer and lifetime requests are not managed by modules themselves.
+By nature of an object existing, the state of the dependencies will also exist. Ownership transfer and lifetime requests are not managed by services themselves.
 
 ==== Agnostic Build System Integration
 Communication with the build environment is done by language definitions through macros. C++ does not support compilation via https://en.cppreference.com/w/cpp/preprocessor/conditional[conditional inclusion] without them. With a standardized set of macros, it is the build system's responsibility to fulfill the macro data as it sees fit. A format is provided with CMake and Meson utilities to simplify build system integration. The implementation of those utilities can be found in another repository.
 
 === Dependency Injection
-Dependency injection can be broken into two parts, the injection and dependency wiring. Injection in C++ is simply the passing of types to the constructor of another type. Dependencies are modelled after the same behaviors as CPPaste Modules with the additional expression of lifetime.
+Dependency injection can be broken into two parts, the injection and dependency wiring. Injection in C++ is simply the passing of types to the constructor of another type. Dependencies are modelled after the same behaviors as CPPaste Services with the additional expression of lifetime.
 
 * Unique ownership
 * Shared ownership

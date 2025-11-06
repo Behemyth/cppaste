@@ -1,44 +1,43 @@
-cmake_minimum_required(VERSION 3.18.2 FATAL_ERROR)
+cmake_minimum_required(VERSION 4.0 FATAL_ERROR)
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}) #TODO: remove with new Conan generator
-list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}) #TODO: remove with new Conan generator
-
-# Global Options
-set(CMAKE_FIND_PACKAGE_PREFER_CONFIG ON) # Opposite module/PCF order for `find_package`
-set_property(GLOBAL PROPERTY USE_FOLDERS ON) # Group the default targets in a folder
-
-
-project(tests 
-	DESCRIPTION "Test project for Synodic Core"
+project(tests
+	DESCRIPTION "Test project for CPPaste"
 	LANGUAGES CXX
 )
-
 
 add_executable(tests)
 
 set_target_properties(tests
-	PROPERTIES 
+	PROPERTIES
 		LINKER_LANGUAGE CXX
-		CXX_STANDARD 20
+		CXX_STANDARD 23
 		CXX_STANDARD_REQUIRED ON
 		CXX_EXTENSIONS NO
 )
 
-
-find_package(doctest 2.4.4 REQUIRED)
+find_package(honesty REQUIRED)
 
 target_link_libraries(tests
-PUBLIC
-	${CMAKE_PROJECT_NAME}
-    doctest::doctest
-)
-
-
-file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/*)
-
-target_sources(tests
 	PRIVATE
-		${SOURCES}
+	synodic::cppaste
+	synodic::honesty
+	synodic::honesty_main
 )
 
-doctest_discover_tests(tests)
+add_subdirectory(src/integration)
+add_subdirectory(src/unit)
+add_subdirectory(src/examples)
+
+# Glob all files to add a source group tree
+file(GLOB_RECURSE file_list ${CMAKE_CURRENT_SOURCE_DIR}/*)
+
+# Must be called from the target definition directory. Only matched against target source files (No nested CMakeList.txt, docs, etc).
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${file_list})
+
+# Make the 'tests' project the default startup
+set_property(
+	DIRECTORY
+	${CMAKE_SOURCE_DIR}
+	PROPERTY
+	VS_STARTUP_PROJECT tests
+)

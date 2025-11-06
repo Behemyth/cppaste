@@ -1,3 +1,4 @@
 build/
 .vs/
 .pdm-python
+vc140.pdb

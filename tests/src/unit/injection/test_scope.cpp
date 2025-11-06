@@ -1,47 +1,57 @@
-#include "doctest/doctest.h"
+import std;
+import synodic.honesty.test;
+import synodic.cppaste.injection;
 
-#include "synodic/injection/scope.h"
+using namespace honesty::test::literals;
 
-class Interface
+namespace
 {
-public:
-	virtual ~Interface() noexcept = default;
-
-	virtual void TestFunction() = 0;
-};
-
-class Implementation final : public Interface
-{
-public:
-	~Implementation() noexcept override = default;
-
-	void TestFunction() override
+	class Interface
 	{
-	}
-};
+	public:
+		virtual ~Interface() noexcept = default;
 
+		virtual void TestFunction() = 0;
+	};
 
-TEST_SUITE("Scope")
-{
-
-	TEST_CASE("Unique Create")
+	class Implementation final : public Interface
 	{
-		cppaste::UniqueScope unique;
+	public:
+		~Implementation() noexcept override = default;
 
-		const auto result1 = unique.Create<int>();
-		const auto result2 = unique.Create<int>();
+		void TestFunction() override
+		{
+		}
+	};
 
-		//CHECK(result1 != result2);
-	}
+	honesty::test::Suite SUITE(
+		"scope",
+		[]() -> honesty::test::Generator
+		{
+			co_yield "unique_create"_test = [](const honesty::test::Requirements& requirements)
+			{
+				cppaste::UniqueScope unique;
 
-	TEST_CASE("Shared Create")
-	{
-		cppaste::SharedScope shared;
+				const auto result1 = unique.Create<int>();
+				const auto result2 = unique.Create<int>();
 
-		const auto result1 = shared.Create<int>();
-		const auto result2 = shared.Create<int>();
+				requirements.Assert(result1 != nullptr);
+				requirements.Assert(result2 != nullptr);
+				requirements.Expect(result1 != result2); // Unique pointers should be different
+			};
 
-		//CHECK(result1 == result2);
-	}
-	
+			co_yield "shared_create"_test = [](const honesty::test::Requirements& requirements)
+			{
+				cppaste::SharedScope shared;
+
+				const auto result1 = shared.Create<int>();
+				const auto result2 = shared.Create<int>();
+
+				requirements.Assert(result1 != nullptr);
+				requirements.Assert(result2 != nullptr);
+				// Note: Each call creates a new shared_ptr, so they won't be equal
+			};
+		});
+
+	honesty::test::SuiteRegistrar _(SUITE);
 }

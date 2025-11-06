@@ -1,7 +1,21 @@
-#include "doctest/doctest.h"
-#include "synodic/injection/solver.h"
+import std;
+import synodic.honesty.test;
+import synodic.cppaste.injection;
 
+using namespace honesty::test::literals;
 
-TEST_SUITE("Solver")
+namespace
 {
+	honesty::test::Suite SUITE(
+		"solver",
+		[]() -> honesty::test::Generator
+		{
+			co_yield "solver_construction"_test = [](const honesty::test::Requirements& requirements)
+			{
+				cppaste::Solver<int> solver;
+				requirements.Assert(true); // Test construction succeeded
+			};
+		});
+
+	honesty::test::SuiteRegistrar _(SUITE);
 }
