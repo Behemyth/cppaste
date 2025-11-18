@@ -24,7 +24,6 @@ class MyProject(CPPythonBase):
     def requirements(self):
         super().requirements()  # Get CPPython managed dependencies
         # Add your custom requirements here
-        # self.requires("custom-lib/1.0.0")
 
     def build_requirements(self):
         super().build_requirements()  # Get CPPython managed test dependencies
