@@ -25,10 +25,7 @@ lint = ["ruff>=0.14.5", "pyrefly>=0.42.1", "isort>=7.0.0"]
 test = ["pytest-cov>=7.0.0", "pytest-mock>=3.15.1"]
 
 [tool.cppython]
-dependencies = []
-
-[tool.cppython.dependency-groups]
-test = ['honesty>=0.0.0.dev1']
+dependencies = ['honesty>=0.0.0.dev1']
 
 [tool.cppython.generators.cmake]
 preset_file = "tool/cmake/platform/common/CMakePresets.json"

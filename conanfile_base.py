@@ -12,8 +12,8 @@ class CPPythonBase(ConanFile):
 
     def requirements(self):
         """CPPython managed requirements."""
-        pass  # No requirements
+        self.requires("honesty/[>=0.0.0.dev1]")
 
     def build_requirements(self):
         """CPPython managed build and test requirements."""
-        self.test_requires("honesty/[>=0.0.0.dev1]")
+        pass  # No test requirements
