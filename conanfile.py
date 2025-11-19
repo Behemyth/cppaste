@@ -18,6 +18,8 @@ class MyProject(CPPythonBase):
         deps.generate()
         tc = CMakeToolchain(self)
         tc.user_presets_path = None
+        # Disable tests during package creation (tests folder not exported)
+        tc.variables['BUILD_TESTING'] = 'OFF'
         tc.generate()
 
     def requirements(self):
