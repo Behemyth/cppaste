@@ -7,7 +7,7 @@ using namespace honesty::test::literals;
 namespace
 {
 	honesty::test::Suite STATIC_SERVICE_SUITE(
-		"static_service",
+		"static_service_integration",
 		[]() -> honesty::test::Generator
 		{
 			co_yield "static_service_integration"_test = [](const honesty::test::Requirements& requirements)

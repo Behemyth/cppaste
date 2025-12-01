@@ -9,6 +9,7 @@ target_sources(cppaste
 			interface.ixx
 			storage.ixx
 			service.ixx
+			lifecycle.ixx
 	PRIVATE
 		FILE_SET cppaste_private
 		TYPE CXX_MODULES

@@ -7,6 +7,7 @@ target_sources(cppaste
 		FILES
 			binding.ixx
 			c_abi.ixx
+			plugin.ixx
 	PRIVATE
 		FILE_SET cppaste_private
 		TYPE CXX_MODULES

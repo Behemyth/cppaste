@@ -4,3 +4,4 @@ export module synodic.cppaste.composition;
 export import :interface;
 export import :storage;
 export import :service;
+export import :lifecycle;

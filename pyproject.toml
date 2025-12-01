@@ -28,7 +28,7 @@ docs = [
 ]
 
 [tool.cppython]
-dependencies = ['honesty>=0.0.0.dev1']
+dependencies = ['honesty>=0.0.0.dev1', 'synodic-template-library>=0.0.0.dev1']
 
 [tool.cppython.generators.cmake]
 preset_file = "tool/cmake/platform/common/CMakePresets.json"
