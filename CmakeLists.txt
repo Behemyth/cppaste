@@ -88,9 +88,11 @@ install(TARGETS cppaste
 	FILE_SET cppaste_private DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cppaste
 )
 
-# Create empty include directory to satisfy CMake's exported target requirements
-# (module-only library with no headers, but CMake expects the directory to exist)
-install(DIRECTORY DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+# Install public headers (export macros for downstream plugin development)
+install(
+	DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
+	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
 
 # Export and package configuration
 install(EXPORT cppasteTargets

@@ -32,9 +32,10 @@ set_target_properties(test_plugin
 		LIBRARY_OUTPUT_DIRECTORY $<TARGET_FILE_DIR:tests>
 )
 
-# Include the plugin interface header
+# Include the plugin interface header and library export header
 target_include_directories(test_plugin
 	PRIVATE
+		${CMAKE_SOURCE_DIR}/include
 		${CMAKE_SOURCE_DIR}/examples/binding/src
 )
 

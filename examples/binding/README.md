@@ -61,15 +61,15 @@ struct MyPlugin {
 
 extern "C" {
 
-PLUGIN_EXPORT void* plugin_create(void* context) {
+CPPASTE_EXPORT void* plugin_create(void* context) {
     return new MyPlugin();
 }
 
-PLUGIN_EXPORT void plugin_destroy(void* instance) {
+CPPASTE_EXPORT void plugin_destroy(void* instance) {
     delete static_cast<MyPlugin*>(instance);
 }
 
-PLUGIN_EXPORT PluginInfo plugin_get_info() {
+CPPASTE_EXPORT PluginInfo plugin_get_info() {
     return {"MyPlugin", "1.0.0", "Author"};
 }
 

@@ -33,17 +33,17 @@ namespace
 extern "C"
 {
 
-PLUGIN_EXPORT void* plugin_create(void* context)
+CPPASTE_EXPORT void* plugin_create(void* context)
 {
 	return new TestPlugin(context);
 }
 
-PLUGIN_EXPORT void plugin_destroy(void* instance)
+CPPASTE_EXPORT void plugin_destroy(void* instance)
 {
 	delete static_cast<TestPlugin*>(instance);
 }
 
-PLUGIN_EXPORT PluginInfo plugin_get_info(void)
+CPPASTE_EXPORT PluginInfo plugin_get_info(void)
 {
 	return PluginInfo{PLUGIN_NAME, PLUGIN_VERSION, PLUGIN_AUTHOR};
 }
@@ -53,7 +53,7 @@ PLUGIN_EXPORT PluginInfo plugin_get_info(void)
  * @param instance Plugin instance
  * @return The value stored in the plugin
  */
-PLUGIN_EXPORT int plugin_get_value(void* instance)
+CPPASTE_EXPORT int plugin_get_value(void* instance)
 {
 	if (!instance)
 	{
@@ -67,7 +67,7 @@ PLUGIN_EXPORT int plugin_get_value(void* instance)
  * @param instance Plugin instance
  * @param value New value to store
  */
-PLUGIN_EXPORT void plugin_set_value(void* instance, int value)
+CPPASTE_EXPORT void plugin_set_value(void* instance, int value)
 {
 	if (instance)
 	{
@@ -80,7 +80,7 @@ PLUGIN_EXPORT void plugin_set_value(void* instance, int value)
  * @param instance Plugin instance
  * @return The context pointer passed to plugin_create
  */
-PLUGIN_EXPORT void* plugin_get_context(void* instance)
+CPPASTE_EXPORT void* plugin_get_context(void* instance)
 {
 	if (!instance)
 	{

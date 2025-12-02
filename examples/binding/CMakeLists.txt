@@ -55,5 +55,5 @@ install(TARGETS binding_example
 # C header for plugin interface
 install(
 	FILES src/plugin_interface.h
-	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/binding
+	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cppaste/binding
 )

@@ -16,6 +16,8 @@
 #ifndef BINDING_PLUGIN_INTERFACE_H
 #define BINDING_PLUGIN_INTERFACE_H
 
+#include <cppaste/export.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -30,15 +32,6 @@ typedef struct
 	const char* author;  /**< Plugin author */
 } PluginInfo;
 
-/*
- * Cross-platform export macro
- */
-#ifdef _WIN32
-	#define PLUGIN_EXPORT __declspec(dllexport)
-#else
-	#define PLUGIN_EXPORT __attribute__((visibility("default")))
-#endif
-
 /**
  * @brief Create a plugin instance (REQUIRED)
  * @param context Host-provided context pointer (may be NULL)
@@ -46,12 +39,12 @@ typedef struct
  *
  * Example:
  * @code
- * PLUGIN_EXPORT void* plugin_create(void* context) {
+ * CPPASTE_EXPORT void* plugin_create(void* context) {
  *     return new MyPlugin(context);
  * }
  * @endcode
  */
-/* PLUGIN_EXPORT void* plugin_create(void* context); */
+/* CPPASTE_EXPORT void* plugin_create(void* context); */
 
 /**
  * @brief Destroy a plugin instance (REQUIRED)
@@ -59,12 +52,12 @@ typedef struct
  *
  * Example:
  * @code
- * PLUGIN_EXPORT void plugin_destroy(void* instance) {
+ * CPPASTE_EXPORT void plugin_destroy(void* instance) {
  *     delete static_cast<MyPlugin*>(instance);
  * }
  * @endcode
  */
-/* PLUGIN_EXPORT void plugin_destroy(void* instance); */
+/* CPPASTE_EXPORT void plugin_destroy(void* instance); */
 
 /**
  * @brief Get plugin information (OPTIONAL)
@@ -72,12 +65,12 @@ typedef struct
  *
  * Example:
  * @code
- * PLUGIN_EXPORT PluginInfo plugin_get_info(void) {
+ * CPPASTE_EXPORT PluginInfo plugin_get_info(void) {
  *     return {"MyPlugin", "1.0.0", "Author Name"};
  * }
  * @endcode
  */
-/* PLUGIN_EXPORT PluginInfo plugin_get_info(void); */
+/* CPPASTE_EXPORT PluginInfo plugin_get_info(void); */
 
 #ifdef __cplusplus
 }
