@@ -11,7 +11,7 @@ class MyProject(CPPythonBase):
     exports = "conanfile_base.py"  # Export the base file
 
     def layout(self):
-        cmake_layout(self)
+        super().layout()  # Use CPPythonBase layout
 
     def generate(self):
         deps = CMakeDeps(self)
