@@ -5,7 +5,7 @@
 groups = ["default", "build", "docs", "lint", "test"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:d1a75276e4408fab948cc24569c70f7ace4694e0fdddfef7967a9338859cf0c3"
+content_hash = "sha256:e85b90837e87f88624e41c88a6bdd03c42a63e7f815b071f714722ff41fc9b4a"
 
 [[metadata.targets]]
 requires_python = ">=3.14"
@@ -217,7 +217,7 @@ files = [
 
 [[package]]
 name = "cppython"
-version = "0.9.14"
+version = "0.9.15.dev1"
 requires_python = ">=3.14"
 summary = "A Python management solution for C++ dependencies"
 groups = ["build"]
@@ -225,17 +225,18 @@ dependencies = [
     "packaging>=25.0",
     "pydantic>=2.12.5",
     "requests>=2.32.5",
+    "scikit-build-core>=0.11.6",
     "typer>=0.20.0",
     "types-requests>=2.32.4.20250913",
 ]
 files = [
-    {file = "cppython-0.9.14-py3-none-any.whl", hash = "sha256:d714b94e2a3c23e6de3755da3744b0269f9221dcb6ce8324678491e2ae2db64b"},
-    {file = "cppython-0.9.14.tar.gz", hash = "sha256:0856d60b514d3ff1b22f0e7925275a1854a6466c8ddf710184c8b4636611019a"},
+    {file = "cppython-0.9.15.dev1-py3-none-any.whl", hash = "sha256:6ac7bcc1797659cccf3f7c24daffb3710b71cb8f223cb2187dce5eae37e57b8f"},
+    {file = "cppython-0.9.15.dev1.tar.gz", hash = "sha256:f740ae1bed83c7f1086175dee6f649f85c8cc8b887b4f7ec18580de0f5251000"},
 ]
 
 [[package]]
 name = "cppython"
-version = "0.9.14"
+version = "0.9.15.dev1"
 extras = ["cmake", "conan", "git"]
 requires_python = ">=3.14"
 summary = "A Python management solution for C++ dependencies"
@@ -243,12 +244,12 @@ groups = ["build"]
 dependencies = [
     "cmake>=4.2.0",
     "conan>=2.23.0",
-    "cppython==0.9.14",
+    "cppython==0.9.15.dev1",
     "dulwich>=0.24.10",
 ]
 files = [
-    {file = "cppython-0.9.14-py3-none-any.whl", hash = "sha256:d714b94e2a3c23e6de3755da3744b0269f9221dcb6ce8324678491e2ae2db64b"},
-    {file = "cppython-0.9.14.tar.gz", hash = "sha256:0856d60b514d3ff1b22f0e7925275a1854a6466c8ddf710184c8b4636611019a"},
+    {file = "cppython-0.9.15.dev1-py3-none-any.whl", hash = "sha256:6ac7bcc1797659cccf3f7c24daffb3710b71cb8f223cb2187dce5eae37e57b8f"},
+    {file = "cppython-0.9.15.dev1.tar.gz", hash = "sha256:f740ae1bed83c7f1086175dee6f649f85c8cc8b887b4f7ec18580de0f5251000"},
 ]
 
 [[package]]
@@ -442,6 +443,17 @@ files = [
 ]
 
 [[package]]
+name = "pathspec"
+version = "0.12.1"
+requires_python = ">=3.8"
+summary = "Utility library for gitignore style pattern matching of file paths."
+groups = ["build"]
+files = [
+    {file = "pathspec-0.12.1-py3-none-any.whl", hash = "sha256:a0d503e138a4c123b27490a4f7beda6a01c6f288df0e4a8b79c7eb0dc7b4cc08"},
+    {file = "pathspec-0.12.1.tar.gz", hash = "sha256:a482d51503a1ab33b1c67a6c3813a26953dbdc71c31dacaef9a838c4e29f5712"},
+]
+
+[[package]]
 name = "pluggy"
 version = "1.6.0"
 requires_python = ">=3.9"
@@ -538,20 +550,20 @@ files = [
 
 [[package]]
 name = "pyrefly"
-version = "0.43.1"
+version = "0.44.1"
 requires_python = ">=3.8"
 summary = "A fast type checker and language server for Python with powerful IDE features"
 groups = ["lint"]
 files = [
-    {file = "pyrefly-0.43.1-py3-none-macosx_10_12_x86_64.whl", hash = "sha256:e60ada6bd3eb203e72457f3613d35e9997db1b378298c851301cfe84b58c3be9"},
-    {file = "pyrefly-0.43.1-py3-none-macosx_11_0_arm64.whl", hash = "sha256:488b5b77ab8c0998fe9fa48a0ac8c443b13a57a40ba2d998bf29296b5c674cab"},
-    {file = "pyrefly-0.43.1-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:9e2af14499acce4382aec72d36fcf2807bf667f839bc528bacac83b75106643f"},
-    {file = "pyrefly-0.43.1-py3-none-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:5cad0ffbed68e99cd072a8bbe1faa30a4a26efa485775e2a9d0e5426a84ef19f"},
-    {file = "pyrefly-0.43.1-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:dc79bdb599b377178457950c5cc4a61dfb82d8ab388758d1958accddfcef7f6b"},
-    {file = "pyrefly-0.43.1-py3-none-win32.whl", hash = "sha256:e7253b185bb5e5149fb0698f909ccfe7f95d128fbc52fadada0ed539991bcc60"},
-    {file = "pyrefly-0.43.1-py3-none-win_amd64.whl", hash = "sha256:8befa8a7d529db11ed075e1cfec3e30607dffea4a6e4c7622cce50fcec2467cf"},
-    {file = "pyrefly-0.43.1-py3-none-win_arm64.whl", hash = "sha256:8359bb854f5a238c364346836291947ef084516329a50bb400fddf0dd8a9b461"},
-    {file = "pyrefly-0.43.1.tar.gz", hash = "sha256:f97b09a45cbff445025f2581bd7bc20ff904baef19b97d134262e11f88fb154e"},
+    {file = "pyrefly-0.44.1-py3-none-macosx_10_12_x86_64.whl", hash = "sha256:99e2e5d388eeeecf51c30d430563f04e40a5fc5352f3dab82a8f85aca1af2318"},
+    {file = "pyrefly-0.44.1-py3-none-macosx_11_0_arm64.whl", hash = "sha256:89c9d503b040613da2a8ae7044c6530a1d8b8c6dbb13465617e1adb2c99b2e31"},
+    {file = "pyrefly-0.44.1-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:64969d6b44018f70670b416d74c56d80b949933f2651c0673a89359a6816bdde"},
+    {file = "pyrefly-0.44.1-py3-none-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:82a90514f452912c5013162e0d00c5d3eac1265e77be69dd47a73530eced1cdc"},
+    {file = "pyrefly-0.44.1-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:30b4fa577509f927cbcb2f7ad092307ca5a91bc137d74679671e1a6e4fb6f629"},
+    {file = "pyrefly-0.44.1-py3-none-win32.whl", hash = "sha256:d77d7b7f7df7edf40dfca16cc6e2de17ac5c377ba558c9b350d10484a807b04b"},
+    {file = "pyrefly-0.44.1-py3-none-win_amd64.whl", hash = "sha256:7c0ca181400fdd382b4eb24ade6a6f6787c513566b77acb8f79750f80e80133b"},
+    {file = "pyrefly-0.44.1-py3-none-win_arm64.whl", hash = "sha256:5e8cc66acd173e2612361c03ef7b45d7245c04b09cbd24042b27c6081f6cd809"},
+    {file = "pyrefly-0.44.1.tar.gz", hash = "sha256:9ec70988588f39c20bab25827ffb706f6b985acc43ec5f6bad6d3bc1f6881def"},
 ]
 
 [[package]]
@@ -707,6 +719,25 @@ files = [
 ]
 
 [[package]]
+name = "scikit-build-core"
+version = "0.11.6"
+requires_python = ">=3.8"
+summary = "Build backend for CMake based projects"
+groups = ["build"]
+dependencies = [
+    "exceptiongroup>=1.0; python_version < \"3.11\"",
+    "importlib-resources>=1.3; python_version < \"3.9\"",
+    "packaging>=23.2",
+    "pathspec>=0.10.1",
+    "tomli>=1.2.2; python_version < \"3.11\"",
+    "typing-extensions>=3.10.0; python_version < \"3.9\"",
+]
+files = [
+    {file = "scikit_build_core-0.11.6-py3-none-any.whl", hash = "sha256:ce6d8fe64e6b4c759ea0fb95d2f8a68f60d2df31c2989838633b8ec930736360"},
+    {file = "scikit_build_core-0.11.6.tar.gz", hash = "sha256:5982ccd839735be99cfd3b92a8847c6c196692f476c215da84b79d2ad12f9f1b"},
+]
+
+[[package]]
 name = "shellingham"
 version = "1.5.4"
 requires_python = ">=3.7"
@@ -797,7 +828,7 @@ files = [
 
 [[package]]
 name = "zensical"
-version = "0.0.10"
+version = "0.0.11"
 requires_python = ">=3.10"
 summary = "A modern static site generator built by the creators of Material for MkDocs"
 groups = ["docs"]
@@ -811,17 +842,17 @@ dependencies = [
     "tomli>=2.0; python_full_version < \"3.11\"",
 ]
 files = [
-    {file = "zensical-0.0.10-cp310-abi3-macosx_10_12_x86_64.whl", hash = "sha256:d371c9ff57cb2dc8d3b7ec630d4cf0ffa4cba3b414619c4975eb801a032105c0"},
-    {file = "zensical-0.0.10-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:5bd06c9a1fb536e23cf6f5acb83af492a0aaf457708a81589731a33ab1695a1e"},
-    {file = "zensical-0.0.10-cp310-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:bd6c4447aaa58e2545c3b7a5d39fa1f5a0e9062f1a2d380c3c21aac0a8979b5a"},
-    {file = "zensical-0.0.10-cp310-abi3-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:95a91f13920975fc9744f052c028800e0b0553f52c9417bef8a6e16864459bd8"},
-    {file = "zensical-0.0.10-cp310-abi3-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:a22908517458428bd91adfbcf4813c7b63011cd1b6761956f81255993d903ae7"},
-    {file = "zensical-0.0.10-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a482443e7aded812c3e72250f2ba8b4e77f09a626c1c9892766168dd2acf8dfd"},
-    {file = "zensical-0.0.10-cp310-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:679d32bceac749a79ef11c08e5c0eb7c3e8e73f4c35732a2f6bcaa3ffaa61a70"},
-    {file = "zensical-0.0.10-cp310-abi3-musllinux_1_2_armv7l.whl", hash = "sha256:db42271a085bf8efe2d6dc9f97325e866fcfa2fafe7e079c5bc0f0e8407275fa"},
-    {file = "zensical-0.0.10-cp310-abi3-musllinux_1_2_i686.whl", hash = "sha256:11e9acdfd6622dc43862c99e4669ebe56f4e7ab2cefe73a74005549a09ac679e"},
-    {file = "zensical-0.0.10-cp310-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:3fc7e47efbd90f476276492049ade0587f32f95216062ed4ecc02857f2cbca39"},
-    {file = "zensical-0.0.10-cp310-abi3-win32.whl", hash = "sha256:feaab818c28170a8b542f729c2941c2a766d7026d24bcf13b403f843250fa15b"},
-    {file = "zensical-0.0.10-cp310-abi3-win_amd64.whl", hash = "sha256:64f208a3168eb616985680e84a76ca2dbf0064508c4ce8655f7fd81db10636aa"},
-    {file = "zensical-0.0.10.tar.gz", hash = "sha256:9a9b60a3757fb0f4cf2ec33844bf29141f02223e99440698cfb6911bb1f49956"},
+    {file = "zensical-0.0.11-cp310-abi3-macosx_10_12_x86_64.whl", hash = "sha256:0ef33bf2efdb66e444bb59aff134729ba83b271c2ee034063289cdb5e76b7947"},
+    {file = "zensical-0.0.11-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:8df38c0538eb763a3b3d42f1d179927c0e9b8deec365ff016c00ca71ae287bce"},
+    {file = "zensical-0.0.11-cp310-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:bc672c3d986829add78e2c8bd0e50dd091ae93c9b7144a9ae02908aea63bb601"},
+    {file = "zensical-0.0.11-cp310-abi3-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:bfd215bd14724d63e37eff2f0984517b997616cf1fd68059d7c41edfeb695dd3"},
+    {file = "zensical-0.0.11-cp310-abi3-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:e5c883eaabe82ce733e3a653a28afa901e529574c93a0a51ed2e52801ef064ed"},
+    {file = "zensical-0.0.11-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:32ea5a572473d0f3187d8abeeb6b1a55acd1b09bfecb153820b57a41232b3109"},
+    {file = "zensical-0.0.11-cp310-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:bab3897bb3bf4d3fd81234640590888e95bd7f49070f840e5817b67b25d9cf2f"},
+    {file = "zensical-0.0.11-cp310-abi3-musllinux_1_2_armv7l.whl", hash = "sha256:1744f743d69aa9745570499392ca81962885b90700569ea4564858d01200b1c7"},
+    {file = "zensical-0.0.11-cp310-abi3-musllinux_1_2_i686.whl", hash = "sha256:fb61bd1d3d864bb36caa277b59c4bcf4431fbd6d8d2914a6b0bb1281f6259e5f"},
+    {file = "zensical-0.0.11-cp310-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:bdb776ba9257a0f2a991ce5bd82110a0ca44dfe4342abc545b1e8add12de1ba5"},
+    {file = "zensical-0.0.11-cp310-abi3-win32.whl", hash = "sha256:e4bfbc6cc80e3c927d4372bb005460fd731a71966dec3a5e4f61f5aeccb86cc5"},
+    {file = "zensical-0.0.11-cp310-abi3-win_amd64.whl", hash = "sha256:d7a206c22ac66bbe885a04a5efa27610c5cc4899c78df1f7e8e9a36d298ec14b"},
+    {file = "zensical-0.0.11.tar.gz", hash = "sha256:4c048779787ebcbdf01c15c69287ca5add5f8661c860ea6302c1ad45606e4b5f"},
 ]
