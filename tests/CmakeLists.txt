@@ -15,14 +15,17 @@ set_target_properties(tests
 		CXX_EXTENSIONS NO
 )
 
-find_package(honesty REQUIRED)
+find_package(GTest REQUIRED)
 
 target_link_libraries(tests
 	PRIVATE
 	synodic::cppaste
-	synodic::honesty
-	synodic::honesty_main
+	GTest::gtest
+	GTest::gtest_main
 )
+
+include(GoogleTest)
+gtest_discover_tests(tests)
 
 add_subdirectory(src/integration)
 add_subdirectory(src/unit)

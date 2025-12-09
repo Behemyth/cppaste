@@ -1,21 +1,15 @@
-import std;
-import synodic.honesty.test;
-import synodic.cppaste.injection;
+#include <gtest/gtest.h>
 
-using namespace honesty::test::literals;
+import std;
+import synodic.cppaste.injection;
 
 namespace
 {
-	honesty::test::Suite SUITE(
-		"solver",
-		[]() -> honesty::test::Generator
-		{
-			co_yield "solver_construction"_test = [](const honesty::test::Requirements& requirements)
-			{
-				cppaste::Solver<int> solver;
-				requirements.Assert(true); // Test construction succeeded
-			};
-		});
 
-	honesty::test::SuiteRegistrar _(SUITE);
+TEST(Solver, SolverConstruction)
+{
+	cppaste::Solver<int> solver;
+	ASSERT_TRUE(true); // Test construction succeeded
+}
+
 }

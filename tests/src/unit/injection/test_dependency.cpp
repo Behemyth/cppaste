@@ -1,45 +1,39 @@
-import std;
-import synodic.honesty.test;
-import synodic.cppaste.injection;
+#include <gtest/gtest.h>
 
-using namespace honesty::test::literals;
+import std;
+import synodic.cppaste.injection;
 
 namespace
 {
-	class Interface
+
+class Interface
+{
+public:
+	virtual ~Interface() noexcept = default;
+
+	virtual void TestFunction() = 0;
+};
+
+class Implementation final : public Interface
+{
+public:
+	~Implementation() noexcept override = default;
+
+	void TestFunction() override
 	{
-	public:
-		virtual ~Interface() noexcept = default;
+	}
+};
 
-		virtual void TestFunction() = 0;
-	};
+TEST(Dependency, ValueConstructor)
+{
+	cppaste::Dependency<int, int, cppaste::ScopeType::SHARED> dependency;
+	ASSERT_TRUE(true);	// Test construction succeeded
+}
 
-	class Implementation final : public Interface
-	{
-	public:
-		~Implementation() noexcept override = default;
+TEST(Dependency, DerivedConstructor)
+{
+	cppaste::Dependency<Interface, Implementation, cppaste::ScopeType::SHARED> dependency;
+	ASSERT_TRUE(true);	// Test construction succeeded
+}
 
-		void TestFunction() override
-		{
-		}
-	};
-
-	honesty::test::Suite SUITE(
-		"dependency",
-		[]() -> honesty::test::Generator
-		{
-			co_yield "value_constructor"_test = [](const honesty::test::Requirements& requirements)
-			{
-				cppaste::Dependency<int, int, cppaste::ScopeType::SHARED> dependency;
-				requirements.Assert(true);	// Test construction succeeded
-			};
-
-			co_yield "derived_constructor"_test = [](const honesty::test::Requirements& requirements)
-			{
-				cppaste::Dependency<Interface, Implementation, cppaste::ScopeType::SHARED> dependency;
-				requirements.Assert(true);	// Test construction succeeded
-			};
-		});
-
-	honesty::test::SuiteRegistrar _(SUITE);
 }

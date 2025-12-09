@@ -1,34 +1,28 @@
-import std;
-import synodic.honesty.test;
-import synodic.cppaste.injection;
+#include <gtest/gtest.h>
 
-using namespace honesty::test::literals;
+import std;
+import synodic.cppaste.injection;
 
 namespace
 {
-	honesty::test::Suite SUITE(
-		"injector",
-		[]() -> honesty::test::Generator
-		{
-			co_yield "with_dependency"_test = [](const honesty::test::Requirements& requirements)
-			{
-				// TODO: Implement when injector is ready
-				// constexpr cppaste::Type<int> intType;
-				// cppaste::Injector();
-				requirements.Assert(true);
-			};
 
-			// TODO: Add more tests when implementation is complete
-			// co_yield "with_injector"_test = [](const honesty::test::Requirements& requirements)
-			// {
-			//     cppaste::Injector();
-			// };
+TEST(Injector, WithDependency)
+{
+	// TODO: Implement when injector is ready
+	// constexpr cppaste::Type<int> intType;
+	// cppaste::Injector();
+	ASSERT_TRUE(true);
+}
 
-			// co_yield "with_dependency_and_injector"_test = [](const honesty::test::Requirements& requirements)
-			// {
-			//     cppaste::Injector();
-			// };
-		});
+// TODO: Add more tests when implementation is complete
+// TEST(Injector, WithInjector)
+// {
+//     cppaste::Injector();
+// }
 
-	honesty::test::SuiteRegistrar _(SUITE);
+// TEST(Injector, WithDependencyAndInjector)
+// {
+//     cppaste::Injector();
+// }
+
 }

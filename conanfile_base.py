@@ -22,7 +22,7 @@ class CPPythonBase(ConanFile):
 
     def requirements(self):
         """CPPython managed requirements."""
-        self.requires("honesty/[>=0.0.0.dev1]")
+        self.requires("gtest/1.17.0")
         self.requires("synodic-template-library/[>=0.0.0.dev1]")
 
     def build_requirements(self):

@@ -1,21 +1,15 @@
-import std;
-import synodic.honesty.test;
-import synodic.cppaste.injection;
+#include <gtest/gtest.h>
 
-using namespace honesty::test::literals;
+import std;
+import synodic.cppaste.injection;
 
 namespace
 {
-	honesty::test::Suite SUITE(
-		"type",
-		[]() -> honesty::test::Generator
-		{
-			co_yield "type_construction"_test = [](const honesty::test::Requirements& requirements)
-			{
-				constexpr cppaste::Type<int> type;
-				requirements.Assert(true); // Test construction succeeded
-			};
-		});
 
-	honesty::test::SuiteRegistrar _(SUITE);
+TEST(Type, TypeConstruction)
+{
+	constexpr cppaste::Type<int> type;
+	ASSERT_TRUE(true); // Test construction succeeded
+}
+
 }
