@@ -27,7 +27,7 @@ namespace
 	// Plugin metadata
 	constexpr const char* PLUGIN_NAME = "TestPlugin";
 	constexpr const char* PLUGIN_VERSION = "1.0.0";
-	constexpr const char* PLUGIN_AUTHOR = "CPPaste Test";
+	constexpr const char* PLUGIN_AUTHOR = "cppaste Test";
 }
 
 extern "C"

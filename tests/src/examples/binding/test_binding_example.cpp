@@ -259,7 +259,7 @@ namespace
 
 		EXPECT_EQ(std::string_view(info->name), "TestPlugin");
 		EXPECT_EQ(std::string_view(info->version), "1.0.0");
-		EXPECT_EQ(std::string_view(info->author), "CPPaste Test");
+		EXPECT_EQ(std::string_view(info->author), "cppaste Test");
 
 		host.Unload();
 	}

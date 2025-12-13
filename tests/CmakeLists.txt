@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 4.0 FATAL_ERROR)
 
 project(tests
-	DESCRIPTION "Test project for CPPaste"
+	DESCRIPTION "Test project for cppaste"
 	LANGUAGES CXX
 )
 

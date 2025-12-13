@@ -1,4 +1,4 @@
-# CPPaste source directories
+# cppaste source directories
 
 # Top-level module
 target_sources(cppaste

@@ -6,7 +6,7 @@ set(CMAKE_CXX_MODULE_STD ON)
 
 project(PlatformPropertiesExample
 	VERSION 0.1.0
-	DESCRIPTION "Platform Properties Example using CPPaste Framework"
+	DESCRIPTION "Platform Properties Example using cppaste Framework"
 	LANGUAGES CXX
 )
 

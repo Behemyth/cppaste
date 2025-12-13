@@ -1,5 +1,5 @@
 [project]
-site_name = "CPPaste"
-site_url = "https://synodic.github.io/CPPaste"
+site_name = "cppaste"
+site_url = "https://synodic.github.io/cppaste"
 docs_dir = "docs"
 site_dir = "dist"

@@ -6,7 +6,7 @@ set(CMAKE_CXX_MODULE_STD ON)
 
 project(BindingExample
 	VERSION 0.1.0
-	DESCRIPTION "Plugin Binding Example using CPPaste Framework"
+	DESCRIPTION "Plugin Binding Example using cppaste Framework"
 	LANGUAGES CXX
 )
 

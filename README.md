@@ -1,4 +1,4 @@
-= CPPaste
+= cppaste
 Non-intrusive, sharable program framework for C++23 and beyond.
 :toc:
 
@@ -31,7 +31,7 @@ By nature of an object existing, the state of the dependencies will also exist. 
 Communication with the build environment is done by language definitions through macros. C++ does not support compilation via https://en.cppreference.com/w/cpp/preprocessor/conditional[conditional inclusion] without them. With a standardized set of macros, it is the build system's responsibility to fulfill the macro data as it sees fit. A format is provided with CMake and Meson utilities to simplify build system integration. The implementation of those utilities can be found in another repository.
 
 === Dependency Injection
-Dependency injection can be broken into two parts, the injection and dependency wiring. Injection in C++ is simply the passing of types to the constructor of another type. Dependencies are modelled after the same behaviors as CPPaste Services with the additional expression of lifetime.
+Dependency injection can be broken into two parts, the injection and dependency wiring. Injection in C++ is simply the passing of types to the constructor of another type. Dependencies are modelled after the same behaviors as cppaste Services with the additional expression of lifetime.
 
 * Unique ownership
 * Shared ownership

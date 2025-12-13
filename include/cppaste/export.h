@@ -1,5 +1,5 @@
 /**
- * @brief Platform-specific export macros for CPPaste
+ * @brief Platform-specific export macros for cppaste
  *
  * This header provides cross-platform macros for DLL/shared library symbol visibility.
  * Since C++23 modules cannot export preprocessor macros, this header must be included

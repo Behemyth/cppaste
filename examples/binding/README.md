@@ -1,12 +1,12 @@
 # Binding Example
 
-This example demonstrates CPPaste's plugin and binding infrastructure for loading dynamic libraries at runtime.
+This example demonstrates cppaste's plugin and binding infrastructure for loading dynamic libraries at runtime.
 
 ## Overview
 
 The example shows how to:
 
-1. **Define a plugin interface** using CPPaste's `PluginInterface` CRTP
+1. **Define a plugin interface** using cppaste's `PluginInterface` CRTP
 2. **Create a C ABI contract** that plugins implement
 3. **Load/unload plugins** at runtime using `PluginLoader`
 4. **Use lifecycle services** for plugin state management
