@@ -11,11 +11,11 @@
             "inherits": "cppython",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
+                "BUILD_TESTING": "ON",
                 "CMAKE_CONFIGURATION_TYPES": {
                     "type": "STRING",
                     "value": "Debug;Development;Release"
-                },
-                "BUILD_TESTING": "ON"
+                }
             }
         },
         {
