@@ -1,13 +1,12 @@
-from conan.tools.cmake import CMake, CMakeDeps, CMakeToolchain, cmake_layout
+from conan.tools.cmake import CMake, CMakeDeps, CMakeToolchain
 from conan.tools.files import copy
-
 from conanfile_base import CPPythonBase
 
 
 class MyProject(CPPythonBase):
-    name = 'cppaste'
-    version = '1.0'
-    settings = 'os', 'compiler', 'build_type', 'arch'
+    name = "cppaste"
+    version = "1.0"
+    settings = "os", "compiler", "build_type", "arch"
     exports = "conanfile_base.py"  # Export the base file
 
     def layout(self):
@@ -19,7 +18,7 @@ class MyProject(CPPythonBase):
         tc = CMakeToolchain(self)
         tc.user_presets_path = None
         # Disable tests during package creation (tests folder not exported)
-        tc.variables['BUILD_TESTING'] = 'OFF'
+        tc.variables["BUILD_TESTING"] = "OFF"
         tc.generate()
 
     def requirements(self):
@@ -40,16 +39,21 @@ class MyProject(CPPythonBase):
         cmake.install()
 
     def package_info(self):
-        self.cpp_info.set_property('cmake_find_mode', 'none')
-        self.cpp_info.builddirs = ['.']
+        self.cpp_info.set_property("cmake_find_mode", "none")
+        self.cpp_info.builddirs = ["lib/cmake/cppaste"]
 
     def export_sources(self):
-        copy(self, 'CMakeLists.txt', src=self.recipe_folder, dst=self.export_sources_folder)
-        copy(self, 'src/*', src=self.recipe_folder, dst=self.export_sources_folder)
-        copy(self, 'include/*', src=self.recipe_folder, dst=self.export_sources_folder)
         copy(
             self,
-            'tool/cmake/cppasteConfig.cmake.in',
+            "CMakeLists.txt",
+            src=self.recipe_folder,
+            dst=self.export_sources_folder,
+        )
+        copy(self, "src/*", src=self.recipe_folder, dst=self.export_sources_folder)
+        copy(self, "include/*", src=self.recipe_folder, dst=self.export_sources_folder)
+        copy(
+            self,
+            "tool/cmake/cppasteConfig.cmake.in",
             src=self.recipe_folder,
             dst=self.export_sources_folder,
         )

@@ -14,12 +14,11 @@ project(cppaste
 option(BUILD_TESTING "Build test projects" ON)
 option(BUILD_SHARED_LIBS "Build shared library" OFF)
 
-
 add_library(cppaste)
 add_library(synodic::cppaste ALIAS cppaste)
 
 set_target_properties(cppaste
-PROPERTIES
+	PROPERTIES
 	LINKER_LANGUAGE CXX
 	CXX_STANDARD 23
 	CXX_STANDARD_REQUIRED ON
@@ -29,16 +28,16 @@ PROPERTIES
 target_compile_features(cppaste PUBLIC cxx_std_23)
 
 target_link_libraries(cppaste
-PRIVATE
+	PRIVATE
 )
 
 target_sources(cppaste
 	PUBLIC
-		FILE_SET cppaste_public
-		TYPE CXX_MODULES
+	FILE_SET cppaste_public
+	TYPE CXX_MODULES
 	PRIVATE
-		FILE_SET cppaste_private
-		TYPE CXX_MODULES
+	FILE_SET cppaste_private
+	TYPE CXX_MODULES
 )
 
 # Gather and define all the project and sub-project sources
@@ -55,10 +54,8 @@ file(GLOB_RECURSE file_list ${CMAKE_CURRENT_SOURCE_DIR}/src/*)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/src FILES ${file_list})
 
 if(BUILD_TESTING)
-
 	enable_testing()
-    add_subdirectory(tests)
-
+	add_subdirectory(tests)
 endif()
 
 # Installation
@@ -99,6 +96,7 @@ install(EXPORT cppasteTargets
 	FILE cppasteTargets.cmake
 	NAMESPACE synodic::
 	DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cppaste
+	CXX_MODULES_DIRECTORY cxx-modules
 )
 
 install(
