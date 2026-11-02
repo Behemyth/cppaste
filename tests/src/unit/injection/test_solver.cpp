@@ -8,7 +8,7 @@ namespace
 
 TEST(Solver, SolverConstruction)
 {
-	cppaste::Solver<int> solver;
+	[[maybe_unused]] cppaste::Solver<int> solver;
 	ASSERT_TRUE(true); // Test construction succeeded
 }
 
