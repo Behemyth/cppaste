@@ -3,3 +3,6 @@ build/
 .pdm-python
 vc140.pdb
 /dist
+.cppython.toml
+test_package/CMakeUserPresets.json
+test_package/build/

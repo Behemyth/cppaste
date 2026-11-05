@@ -102,3 +102,16 @@ install(
 	${CMAKE_CURRENT_BINARY_DIR}/cppasteConfigVersion.cmake
 	DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cppaste
 )
+
+# Build-tree package for local-source (editable) consumers. It mirrors the installed
+# lib/cmake/cppaste layout, so a local checkout resolves through the same path as the package.
+set(cppaste_BUILD_PACKAGE_DIR ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}/cmake/cppaste)
+
+export(EXPORT cppasteTargets
+	FILE ${cppaste_BUILD_PACKAGE_DIR}/cppasteTargets.cmake
+	NAMESPACE synodic::
+	CXX_MODULES_DIRECTORY cxx-modules
+)
+
+configure_file(${CMAKE_CURRENT_BINARY_DIR}/cppasteConfig.cmake ${cppaste_BUILD_PACKAGE_DIR}/cppasteConfig.cmake COPYONLY)
+configure_file(${CMAKE_CURRENT_BINARY_DIR}/cppasteConfigVersion.cmake ${cppaste_BUILD_PACKAGE_DIR}/cppasteConfigVersion.cmake COPYONLY)
