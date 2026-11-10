@@ -8,7 +8,7 @@ namespace
 
 TEST(Type, TypeConstruction)
 {
-	constexpr cppaste::Type<int> type;
+	[[maybe_unused]] constexpr cppaste::Type<int> type;
 	ASSERT_TRUE(true); // Test construction succeeded
 }
 

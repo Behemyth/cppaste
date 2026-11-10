@@ -1,3 +1,10 @@
+module;
+
+// System headers belong in the global module fragment, not in the module's purview.
+#ifndef _WIN32
+#include <dlfcn.h>
+#endif
+
 export module synodic.cppaste.binding:plugin;
 
 import std;
@@ -440,8 +447,6 @@ namespace cppaste
 }
 
 #else  // POSIX (Linux, macOS)
-
-#include <dlfcn.h>
 
 namespace cppaste
 {

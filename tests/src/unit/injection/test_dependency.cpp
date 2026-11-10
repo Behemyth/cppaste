@@ -26,13 +26,13 @@ public:
 
 TEST(Dependency, ValueConstructor)
 {
-	cppaste::Dependency<int, int, cppaste::ScopeType::SHARED> dependency;
+	[[maybe_unused]] cppaste::Dependency<int, int, cppaste::ScopeType::SHARED> dependency;
 	ASSERT_TRUE(true);	// Test construction succeeded
 }
 
 TEST(Dependency, DerivedConstructor)
 {
-	cppaste::Dependency<Interface, Implementation, cppaste::ScopeType::SHARED> dependency;
+	[[maybe_unused]] cppaste::Dependency<Interface, Implementation, cppaste::ScopeType::SHARED> dependency;
 	ASSERT_TRUE(true);	// Test construction succeeded
 }
 
