@@ -207,13 +207,13 @@ namespace
 	}
 
 	// ============================================================================
-	// Plugin Loading Integration Tests (require compiled test_plugin DLL)
+	// Plugin Loading Integration Tests (require the compiled test_plugin library)
 	// ============================================================================
 
 	TEST(ExamplePluginLoading, LoadTestPlugin)
 	{
-		// The test plugin DLL should be in the same directory as the test executable
-		std::filesystem::path plugin_path = "test_plugin.dll";
+		// The build passes the test plugin's path; its file name differs by platform
+		std::filesystem::path plugin_path = CPPASTE_TEST_PLUGIN_PATH;
 
 		example::binding::PluginHost host(plugin_path);
 		bool loaded = host.Load();
@@ -228,7 +228,7 @@ namespace
 
 	TEST(ExamplePluginLoading, CreateAndDestroyInstance)
 	{
-		std::filesystem::path plugin_path = "test_plugin.dll";
+		std::filesystem::path plugin_path = CPPASTE_TEST_PLUGIN_PATH;
 		example::binding::PluginHost host(plugin_path);
 
 		ASSERT_TRUE(host.Load());
@@ -249,7 +249,7 @@ namespace
 
 	TEST(ExamplePluginLoading, GetPluginInfo)
 	{
-		std::filesystem::path plugin_path = "test_plugin.dll";
+		std::filesystem::path plugin_path = CPPASTE_TEST_PLUGIN_PATH;
 		example::binding::PluginHost host(plugin_path);
 
 		ASSERT_TRUE(host.Load());
@@ -266,7 +266,7 @@ namespace
 
 	TEST(ExamplePluginLoading, CreateWithContext)
 	{
-		std::filesystem::path plugin_path = "test_plugin.dll";
+		std::filesystem::path plugin_path = CPPASTE_TEST_PLUGIN_PATH;
 		example::binding::PluginHost host(plugin_path);
 
 		ASSERT_TRUE(host.Load());
@@ -283,7 +283,7 @@ namespace
 
 	TEST(ExamplePluginLoading, MultipleHosts)
 	{
-		std::filesystem::path plugin_path = "test_plugin.dll";
+		std::filesystem::path plugin_path = CPPASTE_TEST_PLUGIN_PATH;
 		example::binding::PluginHost host1(plugin_path);
 		example::binding::PluginHost host2(plugin_path);
 
@@ -305,7 +305,7 @@ namespace
 
 	TEST(ExamplePluginLoading, ReloadPlugin)
 	{
-		std::filesystem::path plugin_path = "test_plugin.dll";
+		std::filesystem::path plugin_path = CPPASTE_TEST_PLUGIN_PATH;
 		example::binding::PluginHost host(plugin_path);
 
 		ASSERT_TRUE(host.Load());
@@ -325,7 +325,7 @@ namespace
 
 	TEST(ExamplePluginLoading, DestructorCleanup)
 	{
-		std::filesystem::path plugin_path = "test_plugin.dll";
+		std::filesystem::path plugin_path = CPPASTE_TEST_PLUGIN_PATH;
 
 		{
 			example::binding::PluginHost host(plugin_path);
@@ -340,7 +340,7 @@ namespace
 
 	TEST(ExamplePluginLoading, DoubleCreateFails)
 	{
-		std::filesystem::path plugin_path = "test_plugin.dll";
+		std::filesystem::path plugin_path = CPPASTE_TEST_PLUGIN_PATH;
 		example::binding::PluginHost host(plugin_path);
 
 		ASSERT_TRUE(host.Load());
@@ -356,7 +356,7 @@ namespace
 
 	TEST(ExamplePluginLoading, OperationsAfterUnload)
 	{
-		std::filesystem::path plugin_path = "test_plugin.dll";
+		std::filesystem::path plugin_path = CPPASTE_TEST_PLUGIN_PATH;
 		example::binding::PluginHost host(plugin_path);
 
 		ASSERT_TRUE(host.Load());

@@ -41,3 +41,9 @@ target_include_directories(test_plugin
 
 # Ensure test plugin is built before tests run
 add_dependencies(tests test_plugin)
+
+# The plugin's file name and location differ by platform, so the tests load it by its built path.
+target_compile_definitions(tests
+	PRIVATE
+		"CPPASTE_TEST_PLUGIN_PATH=\"$<TARGET_FILE:test_plugin>\""
+)
