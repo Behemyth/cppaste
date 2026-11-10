@@ -3,6 +3,19 @@ export module example.binding:plugin_contract;
 import std;
 import synodic.cppaste.binding;
 
+// The C type that plugin_interface.h declares for plugins. A declaration in a linkage
+// specification belongs to the global module, so the host calls a plugin's exports through
+// the same function types the plugin defines.
+extern "C"
+{
+	typedef struct
+	{
+		const char* name;
+		const char* version;
+		const char* author;
+	} PluginInfo;
+}
+
 export namespace example::binding
 {
 	/**
@@ -10,12 +23,7 @@ export namespace example::binding
 	 *
 	 * Returned by plugins to identify themselves.
 	 */
-	struct PluginInfo
-	{
-		const char* name;
-		const char* version;
-		const char* author;
-	};
+	using PluginInfo = ::PluginInfo;
 
 	/**
 	 * @brief C ABI function signatures for plugins
