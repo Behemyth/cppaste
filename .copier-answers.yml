@@ -1,5 +1,5 @@
 # Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
-_commit: aa472bf
+_commit: db2ee63
 _src_path: gh:Behemyth/configuration
 use_benchmarks: false
 use_cmake_presets: true
